@@ -1,10 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Mail, ArrowUpRight, Check } from "lucide-react"
+import { sendContactMessage } from "@/lib/contact"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -40,6 +41,7 @@ const channels = [
   },
   {
     label: "WhatsApp",
+    // TODO(owner): replace placeholder phone number with the real WhatsApp number (value + href).
     value: "+27 82 123 4567",
     href: "https://wa.me/27821234567",
     icon: WhatsAppIcon,
@@ -47,6 +49,7 @@ const channels = [
   },
   {
     label: "Facebook",
+    // TODO(owner): replace placeholder Facebook handle/URL with the real account.
     value: "/jdtpromotions",
     href: "https://facebook.com/jdtpromotions",
     icon: FacebookIcon,
@@ -54,6 +57,7 @@ const channels = [
   },
   {
     label: "LinkedIn",
+    // TODO(owner): replace placeholder LinkedIn handle/URL with the real company page.
     value: "JDT Promotions",
     href: "https://linkedin.com/company/jdtpromotions",
     icon: LinkedinIcon,
@@ -71,15 +75,29 @@ const serviceSlugMap: Record<string, string> = {
 
 export function ContactContent() {
   const [submitted, setSubmitted] = useState(false)
-  const [service, setService] = useState("")
-
-  useEffect(() => {
+  // Seed the selected service from the ?service= query param via a lazy
+  // initializer rather than a setState-in-effect (avoids cascading renders).
+  // `window` is undefined during SSR, so this safely defaults to "" there.
+  const [service, setService] = useState(() => {
+    if (typeof window === "undefined") return ""
     const param = new URLSearchParams(window.location.search).get("service")
-    if (param && serviceSlugMap[param]) setService(serviceSlugMap[param])
-  }, [])
+    return param && serviceSlugMap[param] ? serviceSlugMap[param] : ""
+  })
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+
+    // Pass ALL fields through the submission seam, including the selected
+    // service pill (React state, not a form input) which was previously dropped.
+    await sendContactMessage({
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      company: String(formData.get("company") ?? ""),
+      service,
+      message: String(formData.get("message") ?? ""),
+    })
+
     setSubmitted(true)
   }
 
@@ -130,10 +148,14 @@ export function ContactContent() {
             <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <Check className="size-7" />
             </span>
-            <h2 className="font-sans text-2xl font-semibold tracking-tight text-foreground">Message sent</h2>
+            <h2 className="font-sans text-2xl font-semibold tracking-tight text-foreground">Opening your email app…</h2>
             <p className="max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground">
-              Thanks for reaching out. A member of the JDT team will be in touch shortly — usually within one business
-              day.
+              We&apos;ve prefilled a message to our team. Just hit send in your email client to get it to us. If nothing
+              opened, email us directly at{" "}
+              <a href="mailto:hello@jdtpromotions.com" className="font-medium text-foreground underline">
+                hello@jdtpromotions.com
+              </a>{" "}
+              or reach us on WhatsApp.
             </p>
             <Link
               href="/"

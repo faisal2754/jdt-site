@@ -94,7 +94,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
             <div className="flex flex-col gap-1">
               <p className="text-base font-semibold text-foreground">Need something not listed here?</p>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                We exist to turn ambitious ideas into reality. The impossible isn't the end, it's where we get started
+                We exist to turn ambitious ideas into reality. The impossible isn&apos;t the end, it&apos;s where we get started
               </p>
             </div>
             <ContactButton href={`/contact?service=${category.slug}`} size="sm" className="shrink-0" />

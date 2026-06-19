@@ -44,7 +44,6 @@ export const metadata: Metadata = {
     description:
       'World-class printing and design, talent management, and AI-powered development. One partner, unlimited possibilities.',
   },
-  generator: 'v0.app',
 }
 
 export const viewport = {
