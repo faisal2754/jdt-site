@@ -15,14 +15,16 @@ export default function WorkPage() {
   return (
     <>
       <SiteHeader />
-      <PageHero
-        eyebrow="Our work"
-        title="Selected"
-        accent="projects."
-        tagline="A growing portfolio across printing and design, talent management, and AI and development — every project delivered on brand and on time."
-      />
-      <WorkPortfolio />
-      <WorkDivider />
+      <main id="main">
+        <PageHero
+          eyebrow="Our work"
+          title="Selected"
+          accent="projects."
+          tagline="A growing portfolio across printing and design, talent management, and AI and development — every project delivered on brand and on time."
+        />
+        <WorkPortfolio />
+        <WorkDivider />
+      </main>
       <CtaFooter />
     </>
   )

@@ -11,11 +11,11 @@ export function CtaFooter() {
       <section id="contact" className="bg-background py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 32, filter: "blur(2px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center gap-8 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:px-12 lg:py-24"
+            className="flex flex-col items-center gap-8 rounded-3xl bg-card px-6 py-16 text-center shadow-card sm:px-12 lg:py-24"
           >
             <h2 className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               Ready to make your brand{" "}
@@ -30,7 +30,7 @@ export function CtaFooter() {
                 href="https://wa.me/27821234567"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                className="inline-block text-sm text-muted-foreground underline-offset-4 transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground hover:underline"
               >
                 or message us on WhatsApp
               </a>
@@ -76,7 +76,7 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="inline-block text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground"
                   >
                     {link.label}
                   </Link>
@@ -94,7 +94,7 @@ export function SiteFooter() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="inline-block text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground"
                   >
                     {link.label}
                   </a>
@@ -110,7 +110,7 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="inline-block text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground"
                   >
                     {link.label}
                   </Link>
@@ -124,7 +124,7 @@ export function SiteFooter() {
           <Image src="/images/jdt-logo.png" alt="JDT Promotions" width={150} height={36} className="h-8 w-auto" />
           <a
             href="mailto:hello@jdtpromotions.com"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-block text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground"
           >
             hello@jdtpromotions.com
           </a>

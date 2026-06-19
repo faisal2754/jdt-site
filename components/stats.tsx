@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useReducedMotion } from "framer-motion"
 
 const stats = [
   { value: 500, suffix: "+", label: "Projects delivered" },
@@ -14,9 +14,10 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "-60px" })
   const [count, setCount] = useState(0)
+  const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView || shouldReduceMotion) return
     const duration = 1600
     const start = performance.now()
     let frame: number
@@ -28,11 +29,13 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [inView, target])
+  }, [inView, target, shouldReduceMotion])
+
+  const display = shouldReduceMotion ? target : count
 
   return (
     <span ref={ref} className="font-sans text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
-      {count}
+      {display}
       <span className="text-silver">{suffix}</span>
     </span>
   )
@@ -46,8 +49,8 @@ export function Stats() {
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="flex flex-col items-start gap-2"

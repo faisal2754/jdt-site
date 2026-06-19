@@ -14,13 +14,13 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
   const isTalent = category.slug === "talent-management"
 
   return (
-    <main className="pt-16 md:pt-20">
+    <main id="main" className="pt-16 md:pt-20">
       {/* Hero */}
       <section className="border-b border-border bg-background">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6 }}
             className="flex flex-col gap-6"
           >
@@ -35,7 +35,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
               <ContactButton href={`/contact?service=${category.slug}`} />
               <Link
                 href="#roster"
-                className={`rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary ${isTalent ? "" : "hidden"}`}
+                className={`rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-[transform,background-color] duration-150 ease-smooth hover:bg-secondary active:scale-[0.98] ${isTalent ? "" : "hidden"}`}
               >
                 Meet our creators
               </Link>
@@ -46,7 +46,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border"
+            className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-card"
           >
             <Image
               src={category.image || "/placeholder.svg"}
@@ -90,7 +90,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
             ))}
           </div>
 
-          <div className="mt-12 flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-background p-8 sm:flex-row sm:items-center">
+          <div className="mt-12 flex flex-col items-start justify-between gap-6 rounded-2xl bg-background p-8 shadow-card sm:flex-row sm:items-center">
             <div className="flex flex-col gap-1">
               <p className="text-base font-semibold text-foreground">Need something not listed here?</p>
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -129,7 +129,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
               <Link
                 key={cat.id}
                 href={`/services/${cat.slug}`}
-                className="group flex flex-col gap-3 rounded-2xl border border-border bg-background p-8 transition-colors hover:border-silver"
+                className="group flex flex-col gap-3 rounded-2xl bg-background p-8 shadow-card transition-[transform,box-shadow] duration-300 ease-smooth hover:shadow-elevated active:scale-[0.98]"
               >
                 <span className="flex items-center gap-2 font-sans text-xl font-semibold tracking-tight text-foreground">
                   {cat.label}

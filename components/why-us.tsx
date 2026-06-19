@@ -35,21 +35,35 @@ export function WhyUs() {
     <section id="why-us" className="border-t border-border bg-card py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-12 flex flex-col gap-4 lg:mb-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Why JDT</p>
-          <h2 className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <motion.p
+            initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+            className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
+          >
+            Why JDT
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          >
             Not another <span className="font-serif italic font-normal text-silver-bright">agency.</span>
-          </h2>
+          </motion.h2>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((reason, i) => (
             <motion.div
               key={reason.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex flex-col gap-4 rounded-2xl border border-border bg-background p-6 transition-colors hover:border-silver"
+              className="flex flex-col gap-4 rounded-2xl bg-background p-6 shadow-card transition-shadow duration-300 ease-smooth hover:shadow-elevated"
             >
               <span className="flex size-11 items-center justify-center rounded-full border border-border bg-secondary">
                 <reason.icon className="size-5 text-silver-bright" aria-hidden="true" />

@@ -13,13 +13,20 @@ export function WorkDivider() {
   return (
     <section className="border-y border-border bg-background py-24 lg:py-36">
       <div className="mx-auto max-w-4xl px-6">
-        <p ref={ref} className="flex flex-wrap font-sans text-3xl font-medium leading-snug tracking-tight sm:text-4xl lg:text-5xl">
+        <motion.p
+          ref={ref}
+          initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-wrap font-sans text-3xl font-medium leading-snug tracking-tight sm:text-4xl lg:text-5xl"
+        >
           {words.map((word, i) => {
             const start = i / words.length
             const end = start + 1 / words.length
             return <DividerWord key={i} progress={scrollYProgress} range={[start, end]} word={word} />
           })}
-        </p>
+        </motion.p>
       </div>
     </section>
   )

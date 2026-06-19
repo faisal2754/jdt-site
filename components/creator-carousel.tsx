@@ -124,9 +124,9 @@ export function CreatorCarousel() {
             href={`/creators/${c.slug}`}
             draggable={false}
             aria-label={`${c.name} — ${c.category}`}
-            className="group w-56 shrink-0 sm:w-64"
+            className="group w-56 shrink-0 transition-transform duration-150 ease-smooth active:scale-[0.98] sm:w-64"
           >
-            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-card">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-card shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
               <Image
                 src={c.image || "/placeholder.svg"}
                 alt={c.name}
@@ -153,7 +153,7 @@ export function CreatorCarousel() {
       <div className="mx-auto mt-10 flex max-w-7xl justify-center px-6">
         <Link
           href="/talent"
-          className="group inline-flex items-center gap-2 rounded-full border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:border-silver hover:text-foreground"
+          className="group inline-flex items-center gap-2 rounded-full border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-muted-foreground transition-[color,border-color,transform] duration-150 ease-smooth hover:border-silver hover:text-foreground active:scale-[0.98]"
         >
           View our full roster
           <ArrowRight className="size-4 -translate-x-0.5 transition-transform group-hover:translate-x-0.5" />

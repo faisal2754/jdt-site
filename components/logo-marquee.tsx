@@ -9,9 +9,15 @@ export function LogoMarquee() {
   return (
     <section aria-label="Brands that trust us" className="border-y border-border bg-card py-12">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+        <motion.p
+          initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
+        >
           Brands that trust us
-        </p>
+        </motion.p>
       </div>
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <motion.div

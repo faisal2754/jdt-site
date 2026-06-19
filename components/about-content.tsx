@@ -36,8 +36,8 @@ function OriginHero() {
 
       <div className="mx-auto w-full max-w-7xl px-6">
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 12, filter: "blur(2px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.6 }}
           className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
         >
@@ -48,8 +48,8 @@ function OriginHero() {
             {line1.map((word, i) => (
               <motion.span
                 key={i}
-                initial={{ opacity: 0, y: "100%" }}
-                animate={{ opacity: 1, y: "0%" }}
+                initial={{ opacity: 0, y: "100%", filter: "blur(2px)" }}
+                animate={{ opacity: 1, y: "0%", filter: "blur(0px)" }}
                 transition={{ duration: 0.6, delay: 0.15 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 className="mr-[0.25em] inline-block"
               >
@@ -61,8 +61,8 @@ function OriginHero() {
             {line2.map((word, i) => (
               <motion.span
                 key={i}
-                initial={{ opacity: 0, y: "100%" }}
-                animate={{ opacity: 1, y: "0%" }}
+                initial={{ opacity: 0, y: "100%", filter: "blur(2px)" }}
+                animate={{ opacity: 1, y: "0%", filter: "blur(0px)" }}
                 transition={{ duration: 0.6, delay: 0.5 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 className="mr-[0.25em] inline-block font-serif italic font-normal text-silver-bright"
               >
@@ -72,8 +72,8 @@ function OriginHero() {
           </span>
         </h1>
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.6, delay: 0.9 }}
           className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
         >
@@ -247,7 +247,7 @@ function Values() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group flex flex-col gap-4 rounded-3xl border border-border bg-background p-8 transition-colors hover:border-silver"
+              className="group flex flex-col gap-4 rounded-3xl bg-background p-8 shadow-card transition-shadow duration-300 ease-smooth hover:shadow-elevated"
             >
               <span className="flex size-12 items-center justify-center rounded-full border border-border bg-secondary transition-transform group-hover:scale-110">
                 <value.icon className="size-5 text-silver-bright" aria-hidden="true" />
@@ -275,7 +275,7 @@ function AboutCta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-8 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:px-12 lg:py-24"
+          className="flex flex-col items-center gap-8 rounded-3xl bg-card px-6 py-16 text-center shadow-card sm:px-12 lg:py-24"
         >
           <h2 className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Bring us the idea everyone else{" "}

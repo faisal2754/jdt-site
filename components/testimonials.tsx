@@ -61,16 +61,23 @@ export function Testimonials() {
   return (
     <section className="border-t border-border bg-card py-20 lg:py-28">
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-10 px-6 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">What clients say</p>
+        <motion.p
+          initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
+        >
+          What clients say
+        </motion.p>
 
         <div className="relative min-h-[200px] w-full sm:min-h-[170px]">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={index}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35 }}
+              initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.35 } }}
+              exit={{ opacity: 0, y: -16, filter: "blur(2px)", transition: { duration: 0.22 } }}
               className="flex flex-col items-center gap-6"
             >
               <span className="flex items-center gap-1.5" aria-label="5 star review">
@@ -99,24 +106,28 @@ export function Testimonials() {
               prev()
             }}
             aria-label="Previous testimonial"
-            className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-secondary"
+            className="flex size-11 items-center justify-center rounded-full text-foreground shadow-card transition-[transform,box-shadow,color,background-color] duration-300 ease-smooth active:scale-[0.98] hover:bg-secondary hover:shadow-elevated"
           >
             <ChevronLeft className="size-4" />
           </button>
-          <div className="flex items-center gap-2" role="tablist" aria-label="Testimonials">
+          <div className="flex items-center" role="group" aria-label="Testimonials">
             {testimonials.map((t, i) => (
               <button
                 key={t.name}
                 type="button"
-                role="tab"
-                aria-selected={i === index}
-                aria-label={`Testimonial ${i + 1}`}
+                aria-label={`Show testimonial ${i + 1}`}
+                aria-current={i === index}
                 onClick={() => {
                   pauseBriefly()
                   setIndex(i)
                 }}
-                className={`size-2 rounded-full transition-colors ${i === index ? "bg-foreground" : "bg-border"}`}
-              />
+                className="box-border flex items-center justify-center p-2.5 transition-transform duration-150 ease-smooth active:scale-[0.98]"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`size-2 rounded-full transition-colors duration-200 ease-smooth ${i === index ? "bg-foreground" : "bg-border"}`}
+                />
+              </button>
             ))}
           </div>
           <button
@@ -126,7 +137,7 @@ export function Testimonials() {
               next()
             }}
             aria-label="Next testimonial"
-            className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-secondary"
+            className="flex size-11 items-center justify-center rounded-full text-foreground shadow-card transition-[transform,box-shadow,color,background-color] duration-300 ease-smooth active:scale-[0.98] hover:bg-secondary hover:shadow-elevated"
           >
             <ChevronRight className="size-4" />
           </button>

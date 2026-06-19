@@ -12,11 +12,11 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
   const others = creators.filter((c) => c.slug !== creator.slug).slice(0, 6)
 
   return (
-    <main className="pt-16 md:pt-20">
+    <main id="main" className="pt-16 md:pt-20">
       <div className="mx-auto max-w-7xl px-6 py-10 lg:py-16">
         <Link
           href="/services/talent-management#roster"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth hover:text-foreground active:scale-[0.98]"
         >
           <ArrowLeft className="size-4" />
           All creators
@@ -28,7 +28,7 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative aspect-[3/4] overflow-hidden rounded-3xl border border-border bg-card"
+            className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-card shadow-card"
           >
             <Image
               src={creator.image || "/placeholder.svg"}
@@ -42,8 +42,8 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
 
           {/* Info */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-col"
           >
@@ -74,7 +74,7 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="group flex items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-secondary"
+                  className="group flex items-center gap-2 rounded-full bg-card px-4 py-2.5 text-sm text-foreground shadow-card transition-[transform,box-shadow,background-color] duration-200 ease-smooth hover:bg-secondary hover:shadow-elevated active:scale-[0.98]"
                 >
                   <span className="font-medium">{social.label}</span>
                   {social.handle && <span className="text-muted-foreground">{social.handle}</span>}
@@ -106,7 +106,7 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
             </h2>
             <Link
               href="/services/talent-management#roster"
-              className="shrink-0 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+              className="shrink-0 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-[transform,background-color] duration-150 ease-smooth hover:bg-secondary active:scale-[0.98]"
             >
               See all creators
             </Link>
@@ -117,9 +117,9 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
               <Link
                 key={c.slug}
                 href={`/creators/${c.slug}`}
-                className="group w-64 shrink-0 snap-start sm:w-72"
+                className="group w-64 shrink-0 snap-start transition-transform duration-150 ease-smooth active:scale-[0.98] sm:w-72"
               >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-background">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-background shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                   <Image
                     src={c.image || "/placeholder.svg"}
                     alt={c.name}

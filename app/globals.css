@@ -40,6 +40,28 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/*
+ * House motion + depth tokens (ui-polish).
+ * Easing curves are tuned by feel — never the browser defaults.
+ * Shadows are designed for a NEAR-BLACK surface: depth comes from a top inset
+ * highlight (light from above) + a hairline ring as the edge + a soft ambient,
+ * not a drop shadow (which is invisible on dark backgrounds).
+ */
+@theme {
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --shadow-card:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 0 0.5px rgba(255, 255, 255, 0.08);
+  --shadow-elevated:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.09),
+    0 12px 28px -10px rgba(0, 0, 0, 0.75),
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    0 0 0 0.5px rgba(255, 255, 255, 0.1);
+}
+
 :root {
   /* JDT Promotions — monochrome editorial theme */
   --background: oklch(0.13 0 0); /* near black */
@@ -68,7 +90,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -82,6 +104,45 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Tailwind v4 ships buttons with cursor: default — restore the pointer,
+     and kill the 300ms mobile tap delay on everything interactive. */
+  button:not(:disabled),
+  [role='button']:not(:disabled),
+  a,
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+  a,
+  button,
+  [role='button'],
+  input,
+  textarea,
+  select,
+  summary {
+    touch-action: manipulation;
+  }
+
+  /* One consistent, visible focus ring for keyboard users (no mouse rings). */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Skip-to-content link — visible only when focused. */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    transform: translateY(-150%);
+    transition: transform var(--duration-fast, 150ms) var(--ease-smooth);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
   }
 }
 

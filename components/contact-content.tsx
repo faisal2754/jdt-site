@@ -75,6 +75,7 @@ const serviceSlugMap: Record<string, string> = {
 
 export function ContactContent() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   // Seed the selected service from the ?service= query param via a lazy
   // initializer rather than a setState-in-effect (avoids cascading renders).
   // `window` is undefined during SSR, so this safely defaults to "" there.
@@ -88,17 +89,22 @@ export function ContactContent() {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
 
-    // Pass ALL fields through the submission seam, including the selected
-    // service pill (React state, not a form input) which was previously dropped.
-    await sendContactMessage({
-      name: String(formData.get("name") ?? ""),
-      email: String(formData.get("email") ?? ""),
-      company: String(formData.get("company") ?? ""),
-      service,
-      message: String(formData.get("message") ?? ""),
-    })
+    setSubmitting(true)
+    try {
+      // Pass ALL fields through the submission seam, including the selected
+      // service pill (React state, not a form input) which was previously dropped.
+      await sendContactMessage({
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        company: String(formData.get("company") ?? ""),
+        service,
+        message: String(formData.get("message") ?? ""),
+      })
 
-    setSubmitted(true)
+      setSubmitted(true)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -119,7 +125,7 @@ export function ContactContent() {
               href={channel.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-silver hover:bg-muted"
+              className="group flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-card transition-shadow duration-300 ease-smooth hover:bg-muted hover:shadow-elevated active:scale-[0.98]"
             >
               <div className="flex items-center justify-between">
                 <span className="flex size-10 items-center justify-center rounded-full bg-secondary text-foreground">
@@ -141,8 +147,10 @@ export function ContactContent() {
       <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 lg:p-10">
         {submitted ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
+            role="status"
+            aria-live="polite"
+            initial={{ opacity: 0, scale: 0.96, filter: "blur(2px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             className="flex h-full min-h-[24rem] flex-col items-center justify-center gap-4 text-center"
           >
             <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -174,8 +182,9 @@ export function ContactContent() {
                   id="name"
                   name="name"
                   required
+                  autoComplete="name"
                   placeholder="Jane Doe"
-                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver focus-visible:border-silver focus-visible:ring-2 focus-visible:ring-silver"
                 />
               </Field>
               <Field label="Email address" htmlFor="email">
@@ -184,8 +193,9 @@ export function ContactContent() {
                   name="email"
                   type="email"
                   required
+                  autoComplete="email"
                   placeholder="jane@company.com"
-                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver focus-visible:border-silver focus-visible:ring-2 focus-visible:ring-silver"
                 />
               </Field>
             </div>
@@ -194,19 +204,22 @@ export function ContactContent() {
               <input
                 id="company"
                 name="company"
+                autoComplete="organization"
                 placeholder="Company name"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver focus-visible:border-silver focus-visible:ring-2 focus-visible:ring-silver"
               />
             </Field>
 
             <Field label="What can we help with?" htmlFor="service">
-              <div className="flex flex-wrap gap-2">
+              <div role="radiogroup" aria-label="What can we help with?" className="flex flex-wrap gap-2">
                 {services.map((s) => (
                   <button
                     type="button"
                     key={s}
+                    role="radio"
+                    aria-checked={service === s}
                     onClick={() => setService(s)}
-                    className={`rounded-full border px-4 py-2 text-sm transition-colors ${
+                    className={`rounded-full border px-4 py-2 text-sm transition-[transform,color,background-color,border-color] duration-200 ease-smooth active:scale-[0.98] ${
                       service === s
                         ? "border-silver bg-secondary text-foreground"
                         : "border-border text-muted-foreground hover:text-foreground"
@@ -225,16 +238,23 @@ export function ContactContent() {
                 required
                 rows={5}
                 placeholder="Tell us about your project, timeline and goals."
-                className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver"
+                className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-silver focus-visible:border-silver focus-visible:ring-2 focus-visible:ring-silver"
               />
             </Field>
 
             <button
               type="submit"
-              className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
+              disabled={submitting}
+              className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground transition-[transform,opacity] duration-200 ease-smooth hover:-translate-y-0.5 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Send message
-              <ArrowUpRight className="size-4" />
+              {submitting ? (
+                <span className="animate-pulse">Sending…</span>
+              ) : (
+                <>
+                  Send message
+                  <ArrowUpRight className="size-4" />
+                </>
+              )}
             </button>
           </form>
         )}

@@ -32,19 +32,33 @@ export function Process() {
     <section id="process" className="bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-12 flex flex-col gap-4 lg:mb-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">How it works</p>
-          <h2 className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <motion.p
+            initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+            className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
+          >
+            How it works
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          >
             From brief to delivery in{" "}
             <span className="font-serif italic font-normal text-silver-bright">four simple steps</span>
-          </h2>
+          </motion.h2>
         </div>
 
         <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
             <motion.li
               key={step.number}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="flex flex-col gap-4 bg-card p-8"

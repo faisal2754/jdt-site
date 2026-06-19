@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main id="main">
         <AboutContent />
       </main>
       <SiteFooter />

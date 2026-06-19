@@ -18,8 +18,8 @@ export function PageHero({
       <div className="mx-auto max-w-7xl px-6">
         {eyebrow && (
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.5 }}
             className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
           >
@@ -27,8 +27,8 @@ export function PageHero({
           </motion.p>
         )}
         <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.6, delay: 0.05 }}
           className="max-w-4xl text-balance font-sans text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl"
         >
@@ -37,8 +37,8 @@ export function PageHero({
         </motion.h1>
         {tagline && (
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.12 }}
             className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground lg:text-lg"
           >

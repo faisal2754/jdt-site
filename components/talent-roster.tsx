@@ -35,7 +35,7 @@ export function TalentRoster() {
               id="discipline-filter"
               value={filter}
               onChange={(e) => setFilter(e.target.value as (typeof creatorCategories)[number])}
-              className="w-full cursor-pointer appearance-none rounded-full border border-border bg-card px-5 py-3 pr-12 text-sm font-medium text-foreground transition-colors hover:border-silver focus:border-silver focus:outline-none"
+              className="w-full cursor-pointer appearance-none rounded-full border border-border bg-card px-5 py-3 pr-12 text-sm font-medium text-foreground transition-[color,border-color,transform] duration-150 ease-smooth hover:border-silver focus:border-silver focus:outline-none active:scale-[0.98]"
             >
               {available.map((cat) => (
                 <option key={cat} value={cat}>
@@ -59,8 +59,11 @@ export function TalentRoster() {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.4, delay: (i % 4) * 0.05 }}
               >
-                <Link href={`/creators/${creator.slug}`} className="group block">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-card">
+                <Link
+                  href={`/creators/${creator.slug}`}
+                  className="group block transition-transform duration-150 ease-smooth active:scale-[0.98]"
+                >
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-card shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                     <Image
                       src={creator.image || "/placeholder.svg"}
                       alt={creator.name}

@@ -22,7 +22,7 @@ function stripNumber(heading: string) {
 
 export function PolicyContent({ sections }: { sections: PolicySection[] }) {
   return (
-    <main className="bg-background pb-24">
+    <main id="main" className="bg-background pb-24">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[260px_1fr] lg:gap-20">
         {/* Table of contents */}
         <nav aria-label="On this page" className="hidden lg:block">
@@ -33,7 +33,7 @@ export function PolicyContent({ sections }: { sections: PolicySection[] }) {
                 <li key={section.heading}>
                   <a
                     href={`#${slugify(section.heading)}`}
-                    className="group flex items-baseline gap-3 border-l-2 border-transparent py-1.5 pl-4 text-sm text-muted-foreground transition-colors hover:border-silver hover:text-foreground"
+                    className="group flex items-baseline gap-3 border-l-2 border-transparent py-1.5 pl-4 text-sm text-muted-foreground transition-[transform,color,border-color] duration-150 ease-smooth hover:border-silver hover:text-foreground active:scale-[0.98]"
                   >
                     <span className="font-mono text-xs text-muted-foreground/60 transition-colors group-hover:text-silver-bright">
                       {String(i + 1).padStart(2, "0")}
@@ -52,8 +52,8 @@ export function PolicyContent({ sections }: { sections: PolicySection[] }) {
             <motion.section
               key={section.heading}
               id={slugify(section.heading)}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45 }}
               className="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0"
@@ -85,7 +85,7 @@ export function PolicyContent({ sections }: { sections: PolicySection[] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45 }}
-            className="mt-6 flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-card p-8 sm:flex-row sm:items-center"
+            className="mt-6 flex flex-col items-start justify-between gap-6 rounded-2xl bg-card p-8 shadow-card sm:flex-row sm:items-center"
           >
             <div className="flex flex-col gap-1">
               <p className="text-base font-semibold text-foreground">Questions about this policy?</p>

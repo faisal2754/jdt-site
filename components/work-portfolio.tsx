@@ -21,9 +21,15 @@ export function WorkPortfolio() {
         {/* Filter bar — Paper Crowns "PROJECTS [count]" pattern */}
         <div className="mb-10 flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-3">
-            <h2 className="font-sans text-2xl font-bold uppercase tracking-tight text-foreground sm:text-3xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 12, filter: "blur(2px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5 }}
+              className="font-sans text-2xl font-bold uppercase tracking-tight text-foreground sm:text-3xl"
+            >
               Projects
-            </h2>
+            </motion.h2>
             <span className="flex size-8 items-center justify-center rounded-full bg-secondary text-sm font-semibold text-foreground">
               {filtered.length}
             </span>
@@ -35,7 +41,7 @@ export function WorkPortfolio() {
                 key={f}
                 type="button"
                 onClick={() => setFilter(f)}
-                className={`rounded-full border px-4 py-2 text-sm transition-colors ${
+                className={`rounded-full border px-4 py-2 text-sm transition-[color,transform] duration-150 ease-smooth active:scale-[0.98] ${
                   filter === f
                     ? "border-silver bg-secondary text-foreground"
                     : "border-border text-muted-foreground hover:text-foreground"
@@ -60,7 +66,7 @@ export function WorkPortfolio() {
                 transition={{ duration: 0.35 }}
                 className="group"
               >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                   <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}

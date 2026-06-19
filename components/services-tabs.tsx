@@ -12,13 +12,19 @@ export function ServicesTabs() {
   return (
     <section id="services" className="border-t border-border bg-card py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-12 flex flex-col gap-4 lg:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 flex flex-col gap-4 lg:mb-16"
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">What we do</p>
           <h2 className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Every service your brand needs,{" "}
             <span className="font-serif italic font-normal text-silver-bright">under one roof</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Tabs */}
         <div role="tablist" aria-label="Service categories" className="mb-10 flex flex-wrap gap-2">
@@ -30,7 +36,7 @@ export function ServicesTabs() {
               aria-selected={active === cat.id}
               aria-controls={`panel-${cat.id}`}
               onClick={() => setActive(cat.id)}
-              className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors ${
+              className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-[transform,color,background-color,border-color] duration-200 ease-smooth active:scale-[0.98] ${
                 active === cat.id
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-transparent text-muted-foreground hover:border-silver hover:text-foreground"
@@ -47,15 +53,15 @@ export function ServicesTabs() {
             id={`panel-${category.id}`}
             role="tabpanel"
             aria-labelledby={`tab-${category.id}`}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -8, filter: "blur(2px)" }}
             transition={{ duration: 0.3 }}
             className="grid gap-10 lg:grid-cols-5 lg:gap-16"
           >
             {/* Image */}
             <div className="lg:col-span-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card">
                 <Image
                   src={category.image || "/placeholder.svg"}
                   alt={`${category.label} showcase`}
@@ -72,8 +78,8 @@ export function ServicesTabs() {
               {category.services.map((service, i) => (
                 <motion.li
                   key={service.name}
-                  initial={{ opacity: 0, x: 12 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: 12, filter: "blur(2px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                   transition={{ duration: 0.3, delay: i * 0.03 }}
                   className="border-b border-border py-4"
                 >

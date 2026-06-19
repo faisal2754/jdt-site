@@ -41,17 +41,17 @@ export function ContactButton({
     <Link
       href={href}
       onClick={onClick}
-      className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full font-semibold transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 ${sizeClasses[size]} ${variantClasses[variant]} ${fullWidth ? "w-full" : ""} ${className}`}
+      className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full font-semibold transition-[transform,box-shadow] duration-300 ease-smooth hover:-translate-y-0.5 active:scale-[0.98] ${sizeClasses[size]} ${variantClasses[variant]} ${fullWidth ? "w-full" : ""} ${className}`}
     >
       {/* Sliding label stack */}
       <span className="relative block overflow-hidden">
-        <span className="flex items-center gap-1.5 transition-transform duration-300 ease-out group-hover:-translate-y-[160%]">
+        <span className="flex items-center gap-1.5 transition-transform duration-300 ease-smooth group-hover:-translate-y-[160%]">
           Contact us
-          <ArrowUpRight className="size-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="size-4 transition-transform duration-300 ease-smooth group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
         <span
           aria-hidden="true"
-          className="absolute inset-0 flex translate-y-[160%] items-center justify-center font-sans font-extrabold tracking-[0.2em] transition-transform duration-300 ease-out group-hover:translate-y-0"
+          className="absolute inset-0 flex translate-y-[160%] items-center justify-center font-sans font-extrabold tracking-[0.2em] transition-transform duration-300 ease-smooth group-hover:translate-y-0"
         >
           JDT
         </span>
@@ -60,7 +60,7 @@ export function ContactButton({
       {/* Silver sheen sweep */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -translate-x-full skew-x-[-20deg] bg-gradient-to-r from-transparent via-silver-bright/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+        className="pointer-events-none absolute inset-0 -translate-x-full skew-x-[-20deg] bg-gradient-to-r from-transparent via-silver-bright/25 to-transparent transition-transform duration-700 ease-smooth group-hover:translate-x-full"
       />
     </Link>
   )

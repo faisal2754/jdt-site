@@ -15,14 +15,16 @@ export default function TalentPage() {
   return (
     <>
       <SiteHeader />
-      <PageHero
-        eyebrow="The full roster"
-        title="Every creator"
-        accent="we represent."
-        tagline="Browse the complete roster by discipline. Filter to find exactly the kind of talent your campaign needs."
-      />
-      <TalentRoster />
-      <TalentRepresentation />
+      <main id="main">
+        <PageHero
+          eyebrow="The full roster"
+          title="Every creator"
+          accent="we represent."
+          tagline="Browse the complete roster by discipline. Filter to find exactly the kind of talent your campaign needs."
+        />
+        <TalentRoster />
+        <TalentRepresentation />
+      </main>
       <CtaFooter />
     </>
   )

@@ -65,16 +65,16 @@ export function Hero() {
         {/* Copy */}
         <div className="flex max-w-2xl flex-col items-start gap-6 lg:flex-1">
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 16, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.5 }}
             className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground"
           >
             Design. Print. Talent. Development.
           </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
@@ -82,8 +82,8 @@ export function Hero() {
             <span className="font-serif italic font-normal text-silver-bright">unlimited</span> possibilities.
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
@@ -91,15 +91,15 @@ export function Hero() {
             influential talent, and new-gen tech solutions.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap items-center gap-4"
           >
             <ContactButton />
             <Link
               href="#services"
-              className="rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+              className="rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-[transform,background-color] duration-200 ease-smooth hover:bg-secondary active:scale-[0.98]"
             >
               Explore services
             </Link>
