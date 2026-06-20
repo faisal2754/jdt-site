@@ -1,9 +1,10 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile"
 import { Mail, ArrowUpRight, Check } from "lucide-react"
 import { sendContactMessage } from "@/lib/contact"
 
@@ -73,9 +74,14 @@ const serviceSlugMap: Record<string, string> = {
   "ai-and-development": "AI & Development",
 }
 
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""
+
 export function ContactContent() {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [token, setToken] = useState("")
+  const turnstileRef = useRef<TurnstileInstance | null>(null)
   // Seed the selected service from the ?service= query param via a lazy
   // initializer rather than a setState-in-effect (avoids cascading renders).
   // `window` is undefined during SSR, so this safely defaults to "" there.
@@ -89,19 +95,34 @@ export function ContactContent() {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
 
+    if (!token) {
+      setError("Please complete the verification below.")
+      return
+    }
+
     setSubmitting(true)
+    setError(null)
     try {
       // Pass ALL fields through the submission seam, including the selected
       // service pill (React state, not a form input) which was previously dropped.
-      await sendContactMessage({
-        name: String(formData.get("name") ?? ""),
-        email: String(formData.get("email") ?? ""),
-        company: String(formData.get("company") ?? ""),
-        service,
-        message: String(formData.get("message") ?? ""),
-      })
+      await sendContactMessage(
+        {
+          name: String(formData.get("name") ?? ""),
+          email: String(formData.get("email") ?? ""),
+          company: String(formData.get("company") ?? ""),
+          service,
+          message: String(formData.get("message") ?? ""),
+        },
+        token,
+      )
 
       setSubmitted(true)
+    } catch (err) {
+      // Turnstile tokens are single-use — reset the widget so the visitor can
+      // get a fresh one and retry.
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
+      setToken("")
+      turnstileRef.current?.reset()
     } finally {
       setSubmitting(false)
     }
@@ -156,10 +177,10 @@ export function ContactContent() {
             <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <Check className="size-7" />
             </span>
-            <h2 className="font-sans text-2xl font-semibold tracking-tight text-foreground">Opening your email app…</h2>
+            <h2 className="font-sans text-2xl font-semibold tracking-tight text-foreground">Message sent</h2>
             <p className="max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground">
-              We&apos;ve prefilled a message to our team. Just hit send in your email client to get it to us. If nothing
-              opened, email us directly at{" "}
+              Thanks for reaching out — your message is on its way to our team and we usually reply the same day. Prefer
+              another channel? Email us at{" "}
               <a href="mailto:hello@jdtpromotions.com" className="font-medium text-foreground underline">
                 hello@jdtpromotions.com
               </a>{" "}
@@ -242,9 +263,26 @@ export function ContactContent() {
               />
             </Field>
 
+            {TURNSTILE_SITE_KEY ? (
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={TURNSTILE_SITE_KEY}
+                onSuccess={setToken}
+                onExpire={() => setToken("")}
+                onError={() => setToken("")}
+                options={{ theme: "auto" }}
+              />
+            ) : null}
+
+            {error ? (
+              <p role="alert" className="text-sm text-destructive">
+                {error}
+              </p>
+            ) : null}
+
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || !token}
               className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground transition-[transform,opacity] duration-200 ease-smooth hover:-translate-y-0.5 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? (
