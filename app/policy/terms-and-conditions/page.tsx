@@ -3,10 +3,13 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/cta-footer"
 import { PageHero } from "@/components/page-hero"
 import { PolicyContent } from "@/components/policy-content"
+import { JsonLd } from "@/components/json-ld"
+import { breadcrumbSchema } from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description: "The terms and conditions governing the use of JDT Promotions' website and services.",
+  alternates: { canonical: "/policy/terms-and-conditions" },
 }
 
 const sections = [
@@ -82,6 +85,12 @@ const sections = [
 export default function TermsPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Terms & Conditions", path: "/policy/terms-and-conditions" },
+        ])}
+      />
       <SiteHeader />
       <PageHero
         eyebrow="Legal"

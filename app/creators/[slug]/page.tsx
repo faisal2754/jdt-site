@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
 import { CreatorProfile } from "@/components/creator-profile"
 import { CtaFooter } from "@/components/cta-footer"
+import { JsonLd } from "@/components/json-ld"
+import { personSchema, breadcrumbSchema } from "@/lib/structured-data"
 import { creators, getCreatorBySlug } from "@/lib/creators"
 
 export function generateStaticParams() {
@@ -20,6 +22,7 @@ export async function generateMetadata({
   return {
     title: `${creator.name} — Creator`,
     description: creator.bio[0],
+    alternates: { canonical: `/creators/${slug}` },
   }
 }
 
@@ -34,6 +37,16 @@ export default async function CreatorPage({
 
   return (
     <>
+      <JsonLd
+        data={[
+          personSchema(creator),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Talent", path: "/talent" },
+            { name: creator.name, path: `/creators/${creator.slug}` },
+          ]),
+        ]}
+      />
       <SiteHeader />
       <CreatorProfile creator={creator} />
       <CtaFooter />

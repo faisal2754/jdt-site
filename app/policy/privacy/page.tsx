@@ -3,10 +3,13 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/cta-footer"
 import { PageHero } from "@/components/page-hero"
 import { PolicyContent } from "@/components/policy-content"
+import { JsonLd } from "@/components/json-ld"
+import { breadcrumbSchema } from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How JDT Promotions collects, uses, and protects your personal information.",
+  alternates: { canonical: "/policy/privacy" },
 }
 
 const sections = [
@@ -79,6 +82,12 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/policy/privacy" },
+        ])}
+      />
       <SiteHeader />
       <PageHero
         eyebrow="Legal"

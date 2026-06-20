@@ -2,6 +2,8 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
 import { MotionProvider } from '@/components/motion-provider'
+import { JsonLd } from '@/components/json-ld'
+import { organizationSchema, websiteSchema } from '@/lib/structured-data'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -25,6 +27,17 @@ export const metadata: Metadata = {
   description:
     'JDT Promotions delivers world-class printing and design, talent management, and AI-powered development. One team for everything your brand needs.',
   manifest: '/manifest.webmanifest',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   keywords: [
     'printing',
     'graphic design',
@@ -64,6 +77,7 @@ export default function RootLayout({
       className={`bg-background ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="font-sans antialiased">
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <a
           href="#main"
           className="skip-link rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"

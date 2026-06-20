@@ -3,16 +3,25 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/cta-footer"
 import { PageHero } from "@/components/page-hero"
 import { ContactContent } from "@/components/contact-content"
+import { JsonLd } from "@/components/json-ld"
+import { breadcrumbSchema } from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Get in touch with JDT Promotions by email, WhatsApp, Facebook or LinkedIn — or send us a message and we'll reply the same day.",
+  alternates: { canonical: "/contact" },
 }
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       <SiteHeader />
       <main id="main">
         <PageHero

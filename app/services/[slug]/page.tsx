@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
 import { ServicePageContent } from "@/components/service-page-content"
 import { CtaFooter } from "@/components/cta-footer"
+import { JsonLd } from "@/components/json-ld"
+import { serviceSchema, breadcrumbSchema } from "@/lib/structured-data"
 import { serviceCategories, getCategoryBySlug } from "@/lib/services"
 
 export function generateStaticParams() {
@@ -20,6 +22,7 @@ export async function generateMetadata({
   return {
     title: category.label,
     description: category.description,
+    alternates: { canonical: `/services/${slug}` },
   }
 }
 
@@ -34,6 +37,15 @@ export default async function ServicePage({
 
   return (
     <>
+      <JsonLd
+        data={[
+          serviceSchema(category),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: category.label, path: `/services/${category.slug}` },
+          ]),
+        ]}
+      />
       <SiteHeader />
       <ServicePageContent category={category} />
       <CtaFooter />

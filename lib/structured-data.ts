@@ -18,6 +18,16 @@ function absolute(path: string) {
   return path.startsWith("/") ? `${site.url}${path}` : path
 }
 
+/**
+ * Keep only absolute (http/https) hrefs for a `sameAs` array. Placeholder values
+ * such as `"#"`, empty strings, or relative paths are dropped so we never emit
+ * an invalid `sameAs` entry. Returns `{}` (spreadable, omits the key) when empty.
+ */
+function sameAs(hrefs: string[]): { sameAs?: string[] } {
+  const valid = hrefs.filter((href) => href.startsWith("http"))
+  return valid.length > 0 ? { sameAs: valid } : {}
+}
+
 export function organizationSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
@@ -27,7 +37,7 @@ export function organizationSchema(): JsonLd {
     url: site.url,
     logo: `${site.url}${site.logo}`,
     description: site.description,
-    sameAs: [site.socials.facebook, site.socials.linkedin],
+    ...sameAs([site.socials.facebook, site.socials.linkedin]),
     contactPoint: {
       "@type": "ContactPoint",
       email: site.email,
@@ -77,7 +87,7 @@ export function personSchema(creator: Creator): JsonLd {
     jobTitle: creator.category,
     image: absolute(creator.image),
     description: creator.bio[0],
-    sameAs: creator.socials.map((social) => social.href),
+    ...sameAs(creator.socials.map((social) => social.href)),
     worksFor: {
       "@id": `${site.url}#organization`,
     },
