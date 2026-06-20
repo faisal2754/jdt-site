@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ContactButton } from "@/components/contact-button"
+import { site } from "@/lib/site"
 
 export function CtaFooter() {
   return (
@@ -27,7 +28,7 @@ export function CtaFooter() {
             <div className="flex flex-col items-center gap-3">
               <ContactButton size="lg" />
               <a
-                href="https://wa.me/27821234567"
+                href={site.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block text-sm text-muted-foreground underline-offset-4 transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground hover:underline"
@@ -54,9 +55,9 @@ const sitemapLinks = [
 ]
 
 const socialLinks = [
-  { label: "WhatsApp", href: "https://wa.me/27821234567" },
-  { label: "Facebook", href: "https://facebook.com/jdtpromotions" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/jdtpromotions" },
+  { label: "WhatsApp", href: site.whatsapp },
+  { label: "Facebook", href: site.socials.facebook },
+  { label: "LinkedIn", href: site.socials.linkedin },
 ]
 
 const legalLinks = [
@@ -123,10 +124,10 @@ export function SiteFooter() {
         <div className="flex flex-col items-start gap-4 lg:items-end">
           <Image src="/images/jdt-logo.png" alt="JDT Promotions" width={150} height={36} className="h-8 w-auto" />
           <a
-            href="mailto:hello@jdtpromotions.com"
+            href={`mailto:${site.email}`}
             className="inline-block text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth active:scale-[0.98] hover:text-foreground"
           >
-            hello@jdtpromotions.com
+            {site.email}
           </a>
         </div>
       </div>

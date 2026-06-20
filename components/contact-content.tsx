@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile"
 import { Mail, ArrowUpRight, Check } from "lucide-react"
 import { sendContactMessage } from "@/lib/contact"
+import { site } from "@/lib/site"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -35,32 +36,29 @@ function LinkedinIcon({ className }: { className?: string }) {
 const channels = [
   {
     label: "Email",
-    value: "hello@jdtpromotions.com",
-    href: "mailto:hello@jdtpromotions.com",
+    value: site.email,
+    href: `mailto:${site.email}`,
     icon: Mail,
     description: "Best for detailed briefs and documents.",
   },
   {
     label: "WhatsApp",
-    // TODO(owner): replace placeholder phone number with the real WhatsApp number (value + href).
-    value: "+27 82 123 4567",
-    href: "https://wa.me/27821234567",
+    value: site.phone,
+    href: site.whatsapp,
     icon: WhatsAppIcon,
     description: "Quick questions and fast turnarounds.",
   },
   {
     label: "Facebook",
-    // TODO(owner): replace placeholder Facebook handle/URL with the real account.
     value: "/jdtpromotions",
-    href: "https://facebook.com/jdtpromotions",
+    href: site.socials.facebook,
     icon: FacebookIcon,
     description: "Follow our latest projects and news.",
   },
   {
     label: "LinkedIn",
-    // TODO(owner): replace placeholder LinkedIn handle/URL with the real company page.
     value: "JDT Promotions",
-    href: "https://linkedin.com/company/jdtpromotions",
+    href: site.socials.linkedin,
     icon: LinkedinIcon,
     description: "Connect with the team professionally.",
   },
@@ -181,8 +179,8 @@ export function ContactContent() {
             <p className="max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground">
               Thanks for reaching out — your message is on its way to our team and we usually reply the same day. Prefer
               another channel? Email us at{" "}
-              <a href="mailto:hello@jdtpromotions.com" className="font-medium text-foreground underline">
-                hello@jdtpromotions.com
+              <a href={`mailto:${site.email}`} className="font-medium text-foreground underline">
+                {site.email}
               </a>{" "}
               or reach us on WhatsApp.
             </p>
