@@ -7,10 +7,17 @@ import { usePathname } from 'next/navigation'
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { serviceCategories } from '@/lib/services'
+import { useSafeMenu } from '@/lib/use-safe-menu'
 import { ContactButton } from '@/components/contact-button'
 
 export function SiteHeader() {
-  const [servicesOpen, setServicesOpen] = useState(false)
+  const {
+    open: servicesOpen,
+    openMenu: openServices,
+    closeMenu: closeServices,
+    triggerRef: servicesTriggerRef,
+    contentRef: servicesContentRef,
+  } = useSafeMenu()
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
@@ -35,10 +42,10 @@ export function SiteHeader() {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           <div
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            ref={servicesTriggerRef}
+            onMouseEnter={openServices}
             onKeyDown={(e) => {
-              if (e.key === 'Escape') setServicesOpen(false)
+              if (e.key === 'Escape') closeServices()
             }}
           >
             <button
@@ -49,7 +56,7 @@ export function SiteHeader() {
               aria-expanded={servicesOpen}
               aria-haspopup="true"
               aria-current={isServicesActive ? 'page' : undefined}
-              onClick={() => setServicesOpen((o) => !o)}
+              onClick={() => (servicesOpen ? closeServices() : openServices())}
             >
               Services
               <ChevronDown
@@ -60,6 +67,7 @@ export function SiteHeader() {
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div
+                  ref={servicesContentRef}
                   initial={{ opacity: 0, y: 8, filter: 'blur(2px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   exit={{ opacity: 0, y: 8, filter: 'blur(2px)' }}
@@ -71,7 +79,7 @@ export function SiteHeader() {
                       <Link
                         key={cat.id}
                         href={`/services/${cat.slug}`}
-                        onClick={() => setServicesOpen(false)}
+                        onClick={closeServices}
                         className="group flex flex-col gap-2 rounded-2xl bg-card p-6 shadow-card transition-shadow duration-300 ease-smooth hover:bg-muted hover:shadow-elevated"
                       >
                         <span className="flex items-center gap-2 text-base font-semibold tracking-tight text-foreground">
