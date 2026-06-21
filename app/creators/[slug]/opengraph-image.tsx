@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { getCreatorBySlug } from '@/lib/creators'
+import { getCreatorBySlug } from '@/lib/queries/creators'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -10,7 +10,7 @@ export async function generateImageMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const creator = getCreatorBySlug(slug)
+  const creator = await getCreatorBySlug(slug)
   const alt = creator
     ? `${creator.name} — ${creator.category} | JDT Promotions`
     : 'JDT Promotions creator'
@@ -23,7 +23,7 @@ export default async function OpengraphImage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const creator = getCreatorBySlug(slug)
+  const creator = await getCreatorBySlug(slug)
 
   const title = creator ? creator.name : 'JDT Promotions'
   const subtitle = creator ? creator.category : 'Creators & Talent'

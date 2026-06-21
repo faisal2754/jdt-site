@@ -6,6 +6,7 @@ import { TalentRoster } from "@/components/talent-roster"
 import { TalentRepresentation } from "@/components/talent-representation"
 import { JsonLd } from "@/components/json-ld"
 import { breadcrumbSchema } from "@/lib/structured-data"
+import { getCreators } from "@/lib/queries/creators"
 
 export const metadata: Metadata = {
   title: "Full Roster",
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/talent" },
 }
 
-export default function TalentPage() {
+export default async function TalentPage() {
+  const creators = await getCreators()
+
   return (
     <>
       <JsonLd
@@ -31,7 +34,7 @@ export default function TalentPage() {
           accent="we represent."
           tagline="Browse the complete roster by discipline. Filter to find exactly the kind of talent your campaign needs."
         />
-        <TalentRoster />
+        <TalentRoster creators={creators} />
         <TalentRepresentation />
       </main>
       <CtaFooter />

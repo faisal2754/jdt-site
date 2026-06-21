@@ -85,7 +85,7 @@ export function personSchema(creator: Creator): JsonLd {
     "@type": "Person",
     name: creator.name,
     jobTitle: creator.category,
-    image: absolute(creator.image),
+    image: absolute(creator.imageUrl),
     description: creator.bio[0],
     ...sameAs(creator.socials.map((social) => social.href)),
     worksFor: {

@@ -9,21 +9,30 @@ import { WhyUs } from "@/components/why-us"
 import { Process } from "@/components/process"
 import { Testimonials } from "@/components/testimonials"
 import { CtaFooter } from "@/components/cta-footer"
+import { getBrands } from "@/lib/queries/brands"
+import { getServices } from "@/lib/queries/services"
+import { getFeaturedProjects } from "@/lib/queries/projects"
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-export default function Home() {
+export default async function Home() {
+  const [brands, services, featuredProjects] = await Promise.all([
+    getBrands(),
+    getServices(),
+    getFeaturedProjects(),
+  ])
+
   return (
     <>
       <SiteHeader />
       <main id="main">
         <Hero />
-        <LogoMarquee />
+        <LogoMarquee brands={brands} />
         <Stats />
-        <ServicesTabs />
-        <WorkShowcase />
+        <ServicesTabs serviceCategories={services} />
+        <WorkShowcase projects={featuredProjects} />
         <WhyUs />
         <Process />
         <Testimonials />

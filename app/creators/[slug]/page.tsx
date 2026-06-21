@@ -5,9 +5,10 @@ import { CreatorProfile } from "@/components/creator-profile"
 import { CtaFooter } from "@/components/cta-footer"
 import { JsonLd } from "@/components/json-ld"
 import { personSchema, breadcrumbSchema } from "@/lib/structured-data"
-import { creators, getCreatorBySlug } from "@/lib/creators"
+import { getCreators, getCreatorBySlug } from "@/lib/queries/creators"
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const creators = await getCreators()
   return creators.map((c) => ({ slug: c.slug }))
 }
 
@@ -17,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const creator = getCreatorBySlug(slug)
+  const creator = await getCreatorBySlug(slug)
   if (!creator) return { title: "Creator not found" }
   return {
     title: `${creator.name} — Creator`,
@@ -32,7 +33,10 @@ export default async function CreatorPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const creator = getCreatorBySlug(slug)
+  const [creator, creators] = await Promise.all([
+    getCreatorBySlug(slug),
+    getCreators(),
+  ])
   if (!creator) notFound()
 
   return (
@@ -48,7 +52,7 @@ export default async function CreatorPage({
         ]}
       />
       <SiteHeader />
-      <CreatorProfile creator={creator} />
+      <CreatorProfile creator={creator} creators={creators} />
       <CtaFooter />
     </>
   )

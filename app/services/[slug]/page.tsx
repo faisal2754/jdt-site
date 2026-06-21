@@ -5,10 +5,12 @@ import { ServicePageContent } from "@/components/service-page-content"
 import { CtaFooter } from "@/components/cta-footer"
 import { JsonLd } from "@/components/json-ld"
 import { serviceSchema, breadcrumbSchema } from "@/lib/structured-data"
-import { serviceCategories, getCategoryBySlug } from "@/lib/services"
+import { getServices, getServiceBySlug } from "@/lib/queries/services"
+import { getCreators } from "@/lib/queries/creators"
 
-export function generateStaticParams() {
-  return serviceCategories.map((c) => ({ slug: c.slug }))
+export async function generateStaticParams() {
+  const services = await getServices()
+  return services.map((c) => ({ slug: c.slug }))
 }
 
 export async function generateMetadata({
@@ -17,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const category = getCategoryBySlug(slug)
+  const category = await getServiceBySlug(slug)
   if (!category) return { title: "Service not found" }
   return {
     title: category.label,
@@ -32,7 +34,11 @@ export default async function ServicePage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const category = getCategoryBySlug(slug)
+  const [category, services, creators] = await Promise.all([
+    getServiceBySlug(slug),
+    getServices(),
+    getCreators(),
+  ])
   if (!category) notFound()
 
   return (
@@ -47,7 +53,11 @@ export default async function ServicePage({
         ]}
       />
       <SiteHeader />
-      <ServicePageContent category={category} />
+      <ServicePageContent
+        category={category}
+        services={services}
+        creators={creators}
+      />
       <CtaFooter />
     </>
   )

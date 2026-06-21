@@ -5,9 +5,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
-import { creators, creatorCategories } from "@/lib/creators"
+import type { Creator } from "@/lib/creators"
+import { creatorCategories } from "@/lib/creators"
 
-export function TalentRoster() {
+export function TalentRoster({ creators }: { creators: Creator[] }) {
   const [filter, setFilter] = useState<(typeof creatorCategories)[number]>("All")
   const filtered = filter === "All" ? creators : creators.filter((c) => c.category === filter)
 
@@ -65,7 +66,7 @@ export function TalentRoster() {
                 >
                   <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-card shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                     <Image
-                      src={creator.image || "/placeholder.svg"}
+                      src={creator.imageUrl || "/placeholder.svg"}
                       alt={creator.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

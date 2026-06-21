@@ -5,9 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { useReducedMotion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { creators } from "@/lib/creators"
+import type { Creator } from "@/lib/creators"
 
-export function CreatorCarousel() {
+export function CreatorCarousel({ creators }: { creators: Creator[] }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const shouldReduceMotion = useReducedMotion()
   const pausedRef = useRef(false)
@@ -128,7 +128,7 @@ export function CreatorCarousel() {
           >
             <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-card shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
               <Image
-                src={c.image || "/placeholder.svg"}
+                src={c.imageUrl || "/placeholder.svg"}
                 alt={c.name}
                 fill
                 draggable={false}

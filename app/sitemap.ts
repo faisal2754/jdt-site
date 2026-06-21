@@ -1,11 +1,15 @@
 import type { MetadataRoute } from 'next'
-import { creators } from '@/lib/creators'
-import { serviceCategories } from '@/lib/services'
+import { getCreators } from '@/lib/queries/creators'
+import { getServices } from '@/lib/queries/services'
 
 const baseUrl = 'https://jdtpromotions.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
+  const [creators, serviceCategories] = await Promise.all([
+    getCreators(),
+    getServices(),
+  ])
 
   const homepage: MetadataRoute.Sitemap = [
     {

@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { getCategoryBySlug } from '@/lib/services'
+import { getCategoryBySlug } from '@/lib/queries/services'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -10,7 +10,7 @@ export async function generateImageMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const category = getCategoryBySlug(slug)
+  const category = await getCategoryBySlug(slug)
   const alt = category
     ? `${category.label} | JDT Promotions`
     : 'JDT Promotions services'
@@ -23,7 +23,7 @@ export default async function OpengraphImage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const category = getCategoryBySlug(slug)
+  const category = await getCategoryBySlug(slug)
 
   const title = category ? category.label : 'JDT Promotions'
   const subtitle = category

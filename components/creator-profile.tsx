@@ -5,10 +5,15 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import type { Creator } from "@/lib/creators"
-import { creators } from "@/lib/creators"
 import { ContactButton } from "@/components/contact-button"
 
-export function CreatorProfile({ creator }: { creator: Creator }) {
+export function CreatorProfile({
+  creator,
+  creators,
+}: {
+  creator: Creator
+  creators: Creator[]
+}) {
   const others = creators.filter((c) => c.slug !== creator.slug).slice(0, 6)
 
   return (
@@ -31,7 +36,7 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
             className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-card shadow-card"
           >
             <Image
-              src={creator.image || "/placeholder.svg"}
+              src={creator.imageUrl || "/placeholder.svg"}
               alt={creator.name}
               fill
               sizes="(max-width: 1024px) 100vw, 600px"
@@ -121,7 +126,7 @@ export function CreatorProfile({ creator }: { creator: Creator }) {
               >
                 <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-background shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                   <Image
-                    src={c.image || "/placeholder.svg"}
+                    src={c.imageUrl || "/placeholder.svg"}
                     alt={c.name}
                     fill
                     sizes="288px"

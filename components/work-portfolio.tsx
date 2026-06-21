@@ -3,14 +3,15 @@
 import { useMemo, useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { projects, projectCategories } from "@/lib/projects"
+import type { Project } from "@/lib/projects"
+import { projectCategories } from "@/lib/projects"
 
-export function WorkPortfolio() {
+export function WorkPortfolio({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<string>("All")
 
   const filtered = useMemo(
     () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
-    [filter],
+    [filter, projects],
   )
 
   const filters = ["All", ...projectCategories]
@@ -68,7 +69,7 @@ export function WorkPortfolio() {
               >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                   <Image
-                    src={project.image || "/placeholder.svg"}
+                    src={project.imageUrl || "/placeholder.svg"}
                     alt={project.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"

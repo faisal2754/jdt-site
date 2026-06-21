@@ -1,9 +1,9 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { trustedBrands as brands } from "@/lib/services"
+import type { Brand } from "@/lib/db/schema"
 
-export function LogoMarquee() {
+export function LogoMarquee({ brands }: { brands: Brand[] }) {
   const shouldReduceMotion = useReducedMotion()
   const doubled = [...brands, ...brands]
   return (
@@ -31,7 +31,7 @@ export function LogoMarquee() {
               aria-hidden={i >= brands.length}
               className="whitespace-nowrap font-serif text-2xl italic text-silver transition-colors hover:text-foreground"
             >
-              {brand}
+              {brand.name}
             </span>
           ))}
         </motion.div>

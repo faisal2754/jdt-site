@@ -4,9 +4,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { featuredProjects } from "@/lib/projects"
+import type { Project } from "@/lib/projects"
 
-export function WorkShowcase() {
+export function WorkShowcase({ projects }: { projects: Project[] }) {
   return (
     <section id="work" className="bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -33,7 +33,7 @@ export function WorkShowcase() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project, i) => (
+          {projects.map((project, i) => (
             <motion.div
               key={project.slug}
               initial={{ opacity: 0, y: 32 }}
@@ -44,7 +44,7 @@ export function WorkShowcase() {
               <Link href="/work" className="group block transition-transform duration-150 ease-smooth active:scale-[0.98]">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">
                   <Image
-                    src={project.image || "/placeholder.svg"}
+                    src={project.imageUrl || "/placeholder.svg"}
                     alt={project.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"

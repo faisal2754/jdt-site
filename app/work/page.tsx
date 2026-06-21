@@ -6,6 +6,7 @@ import { WorkPortfolio } from "@/components/work-portfolio"
 import { WorkDivider } from "@/components/work-divider"
 import { JsonLd } from "@/components/json-ld"
 import { breadcrumbSchema } from "@/lib/structured-data"
+import { getProjects } from "@/lib/queries/projects"
 
 export const metadata: Metadata = {
   title: "Our Work",
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/work" },
 }
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const projects = await getProjects()
+
   return (
     <>
       <JsonLd
@@ -31,7 +34,7 @@ export default function WorkPage() {
           accent="projects."
           tagline="A growing portfolio across printing and design, talent management, and AI and development — every project delivered on brand and on time."
         />
-        <WorkPortfolio />
+        <WorkPortfolio projects={projects} />
         <WorkDivider />
       </main>
       <CtaFooter />

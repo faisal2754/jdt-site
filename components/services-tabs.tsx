@@ -3,9 +3,9 @@
 import { useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { serviceCategories } from "@/lib/services"
+import type { ServiceCategory } from "@/lib/services"
 
-export function ServicesTabs() {
+export function ServicesTabs({ serviceCategories }: { serviceCategories: ServiceCategory[] }) {
   const [active, setActive] = useState(serviceCategories[0].id)
   const category = serviceCategories.find((c) => c.id === active) ?? serviceCategories[0]
 
@@ -63,7 +63,7 @@ export function ServicesTabs() {
             <div className="lg:col-span-2">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card">
                 <Image
-                  src={category.image || "/placeholder.svg"}
+                  src={category.imageUrl || "/placeholder.svg"}
                   alt={`${category.label} showcase`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 480px"

@@ -4,13 +4,21 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight, Check } from "lucide-react"
+import type { Creator } from "@/lib/creators"
 import type { ServiceCategory } from "@/lib/services"
-import { serviceCategories } from "@/lib/services"
 import { CreatorCarousel } from "@/components/creator-carousel"
 import { ContactButton } from "@/components/contact-button"
 
-export function ServicePageContent({ category }: { category: ServiceCategory }) {
-  const others = serviceCategories.filter((c) => c.id !== category.id)
+export function ServicePageContent({
+  category,
+  services,
+  creators,
+}: {
+  category: ServiceCategory
+  services: ServiceCategory[]
+  creators: Creator[]
+}) {
+  const others = services.filter((c) => c.id !== category.id)
   const isTalent = category.slug === "talent-management"
 
   return (
@@ -49,7 +57,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
             className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-card"
           >
             <Image
-              src={category.image || "/placeholder.svg"}
+              src={category.imageUrl || "/placeholder.svg"}
               alt={`${category.label} showcase`}
               fill
               sizes="(max-width: 1024px) 100vw, 600px"
@@ -114,7 +122,7 @@ export function ServicePageContent({ category }: { category: ServiceCategory }) 
               </h2>
             </div>
           </div>
-          <CreatorCarousel />
+          <CreatorCarousel creators={creators} />
         </section>
       )}
 
