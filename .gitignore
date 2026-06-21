@@ -16,3 +16,5 @@ node_modules
 
 # Windows mark-of-the-web artifacts
 *:Zone.Identifier
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
