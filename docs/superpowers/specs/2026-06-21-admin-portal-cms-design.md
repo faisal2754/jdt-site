@@ -65,14 +65,12 @@ lib/queries/
   brands.ts
 lib/auth/
   session.ts      # sign/verify HMAC session token (Web Crypto)
-  password.ts     # scrypt hash + constant-time verify (Node crypto)
   guard.ts        # requireSession() helper for server actions
 lib/storage/
   r2.ts           # S3 client + presigned PUT helper
 middleware.ts     # guards /admin/* (except /admin/login)
 app/admin/        # login, dashboard, CRUD screens (shadcn/ui + server actions)
 scripts/
-  hash-password.ts
   seed.ts
 ```
 
@@ -174,17 +172,19 @@ R2_ACCESS_KEY_ID
 R2_SECRET_ACCESS_KEY
 R2_BUCKET
 R2_PUBLIC_BASE_URL        # e.g. https://cdn.jdtpromotions.com
-ADMIN_PASSWORD_HASH       # scrypt hash from scripts/hash-password.ts
+ADMIN_PASSWORD            # plaintext admin password
 SESSION_SECRET            # HMAC signing secret for the session cookie
 ```
 
 ## Auth (single shared password)
 
-- **Secret:** `ADMIN_PASSWORD_HASH` holds a scrypt hash (Node built-in `crypto`,
-  no extra dependency, no plaintext password in env). `scripts/hash-password.ts`
-  generates it.
+- **Secret:** `ADMIN_PASSWORD` holds the plaintext admin password in env. No
+  hashing — the login action compares the submitted password against it directly
+  (constant-time compare). `SESSION_SECRET` is the separate secret used only to
+  HMAC-sign the session cookie.
 - **Login:** `app/admin/login` — password field → Server Action verifies with a
-  constant-time compare → on success sets a signed, **HTTP-only, Secure,
+  constant-time compare against `ADMIN_PASSWORD` → on success sets a signed,
+  **HTTP-only, Secure,
   SameSite=Lax** session cookie. The token is an HMAC-signed payload with an
   expiry, signed with `SESSION_SECRET` via **Web Crypto** so it verifies in any
   runtime (incl. middleware). Failures return a generic message after a small
@@ -255,8 +255,8 @@ Optional: a lightweight unit test for the session token sign/verify roundtrip.
 ## Rollout
 
 1. Add deps (`drizzle-orm`, `drizzle-kit`, `@neondatabase/serverless`,
-   `@aws-sdk/client-s3`, `@aws-sdk/s3-request-presigner`, `zod`, `tsx`), env vars,
-   and `next.config.mjs` `remotePatterns`.
+   `@aws-sdk/client-s3`, `@aws-sdk/s3-request-presigner`, `zod`, `tsx`, `dotenv`),
+   env vars, and `next.config.mjs` `remotePatterns`.
 2. Define schema, generate + run the first Drizzle migration against Neon.
 3. Build the query/auth/storage layers.
 4. Seed the DB from the current static data.
@@ -268,5 +268,5 @@ Optional: a lightweight unit test for the session token sign/verify roundtrip.
 
 - Neon `DATABASE_URL`.
 - R2 credentials + bucket + public base URL (custom domain recommended).
-- The admin password (run through `scripts/hash-password.ts` to produce
-  `ADMIN_PASSWORD_HASH`).
+- The admin password as plaintext `ADMIN_PASSWORD`, plus a `SESSION_SECRET` for
+  the session cookie.

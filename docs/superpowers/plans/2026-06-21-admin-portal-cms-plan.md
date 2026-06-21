@@ -13,8 +13,8 @@ on top. Run `pnpm build` after each phase as a smoke test.
 
 - `DATABASE_URL` — Neon connection string (needed from Phase 1's migrate step on).
 - R2 credentials + bucket + public base URL (needed from Phase 5).
-- Admin password → run through `scripts/hash-password.ts` to get
-  `ADMIN_PASSWORD_HASH` (needed from Phase 6).
+- Admin password as plaintext `ADMIN_PASSWORD`, plus a `SESSION_SECRET` for the
+  session cookie (needed from Phase 6).
 
 Phases that only write code (no migrate/seed/upload) can be completed without
 these; the verify steps note where a live credential is required.
@@ -26,21 +26,24 @@ these; the verify steps note where a live credential is required.
 **Add deps (pnpm):**
 - runtime: `drizzle-orm`, `@neondatabase/serverless`, `@aws-sdk/client-s3`,
   `@aws-sdk/s3-request-presigner`, `zod`
-- dev: `drizzle-kit`, `tsx`
+- dev: `drizzle-kit`, `tsx`, `dotenv`
 
-**`drizzle.config.ts`** (root): `dialect: 'postgresql'`, `schema:
-'./lib/db/schema.ts'`, `out: './drizzle'`, `dbCredentials: { url: DATABASE_URL }`.
+(`dotenv` loads `.env.local` for tsx scripts and `drizzle.config.ts`, which
+drizzle-kit/tsx do not auto-load.)
+
+**`drizzle.config.ts`** (root): load `.env.local` via dotenv at the top, then
+`dialect: 'postgresql'`, `schema: './lib/db/schema.ts'`, `out: './drizzle'`,
+`dbCredentials: { url: DATABASE_URL }`.
 
 **`.env.local`** — add placeholders; also create **`.env.example`** documenting:
 `DATABASE_URL`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`,
-`R2_BUCKET`, `R2_PUBLIC_BASE_URL`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`.
+`R2_BUCKET`, `R2_PUBLIC_BASE_URL`, `ADMIN_PASSWORD` (plaintext), `SESSION_SECRET`.
 
 **`next.config.mjs`** — add `images.remotePatterns` for the R2 public host
 (hostname of `R2_PUBLIC_BASE_URL`); keep the existing `formats`.
 
 **`package.json` scripts:** `db:generate` (drizzle-kit generate), `db:migrate`
-(drizzle-kit migrate), `db:seed` (tsx scripts/seed.ts), `hash-password`
-(tsx scripts/hash-password.ts).
+(drizzle-kit migrate), `db:seed` (tsx scripts/seed.ts).
 
 **Verify:** `pnpm install` clean; `pnpm build` clean (nothing wired up yet).
 
@@ -141,15 +144,13 @@ Full in-admin flow is verified in Phase 8.
 
 ## Phase 6 — Auth (single shared password)
 
-- **`lib/auth/password.ts`** — scrypt hash + constant-time verify (Node `crypto`).
-- **`scripts/hash-password.ts`** — print a hash for a given password → set
-  `ADMIN_PASSWORD_HASH`.
 - **`lib/auth/session.ts`** — `createSessionToken(expiry)` / `verifySessionToken`
   using Web Crypto HMAC + `SESSION_SECRET`; cookie `jdt_admin`, HTTP-only, Secure,
   SameSite=Lax.
 - **`lib/auth/guard.ts`** — `requireSession()` for admin server actions + server
   components.
-- **`app/admin/login/page.tsx`** + login server action (verify password → set
+- **`app/admin/login/page.tsx`** + login server action (constant-time compare of
+  the submitted password against the plaintext `ADMIN_PASSWORD` env var → set
   cookie → redirect `/admin`; generic error + small fixed delay on failure) +
   signout action.
 - **`middleware.ts`** — matcher `/admin/:path*`; allow `/admin/login`; verify
