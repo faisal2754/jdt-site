@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Check } from "lucide-react"
 import type { Creator } from "@/lib/creators"
 import type { ServiceCategory } from "@/lib/services"
+import { groupServicesByAudience } from "@/lib/services"
 import { CreatorCarousel } from "@/components/creator-carousel"
 import { ContactButton } from "@/components/contact-button"
 
@@ -19,7 +20,8 @@ export function ServicePageContent({
   creators: Creator[]
 }) {
   const others = services.filter((c) => c.id !== category.id)
-  const isTalent = category.slug === "talent-management"
+  const isTalent = category.slug === "influencer-marketing"
+  const audienceGroups = groupServicesByAudience(category.services)
 
   return (
     <main id="main" className="pt-16 md:pt-20">
@@ -77,26 +79,59 @@ export function ServicePageContent({
               <span className="font-serif italic font-normal text-silver-bright">{category.label}</span>
             </h2>
           </div>
-          <div className="grid gap-x-10 gap-y-px sm:grid-cols-2">
-            {category.services.map((service, i) => (
-              <motion.div
-                key={service.name}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: (i % 2) * 0.05 }}
-                className="flex gap-4 border-b border-border py-5"
-              >
-                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary">
-                  <Check className="size-3.5 text-foreground" />
-                </span>
-                <div>
-                  <h3 className="text-base font-semibold text-foreground">{service.name}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+          {audienceGroups ? (
+            <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
+              {audienceGroups.map((group) => (
+                <div key={group.key} className="flex flex-col">
+                  <h3 className="mb-4 border-b border-border pb-3 font-sans text-2xl font-semibold tracking-tight text-foreground">
+                    For{" "}
+                    <span className="font-serif italic font-normal text-silver-bright">{group.title}</span>
+                  </h3>
+                  <div className="flex flex-col">
+                    {group.items.map((service, i) => (
+                      <motion.div
+                        key={service.name}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        className="flex gap-4 border-b border-border py-5"
+                      >
+                        <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary">
+                          <Check className="size-3.5 text-foreground" />
+                        </span>
+                        <div>
+                          <h4 className="text-base font-semibold text-foreground">{service.name}</h4>
+                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-x-10 gap-y-px sm:grid-cols-2">
+              {category.services.map((service, i) => (
+                <motion.div
+                  key={service.name}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: (i % 2) * 0.05 }}
+                  className="flex gap-4 border-b border-border py-5"
+                >
+                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary">
+                    <Check className="size-3.5 text-foreground" />
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground">{service.name}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
           <div className="mt-12 flex flex-col items-start justify-between gap-6 rounded-2xl bg-background p-8 shadow-card sm:flex-row sm:items-center">
             <div className="flex flex-col gap-1">

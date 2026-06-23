@@ -6,15 +6,15 @@ import { Layers, Zap, Users, Sparkles } from "lucide-react"
 const reasons = [
   {
     icon: Layers,
-    title: "One partner, every channel",
+    title: "One partner, everything handled",
     description:
-      "Print, people and pixels working together. No juggling agencies — one team that keeps your brand consistent everywhere.",
+      "Print, people and pixels all working together. One team that keeps your brand consistent everywhere.",
   },
   {
     icon: Zap,
-    title: "Fast turnarounds",
+    title: "Impossible turnarounds",
     description:
-      "Tight deadline? That's our specialty. Most design and print jobs turn around in 24–48 hours without cutting corners.",
+      "Tight deadline? That's our specialty. No cutting corners. If it's not possible, we will make it possible.",
   },
   {
     icon: Users,
@@ -24,9 +24,9 @@ const reasons = [
   },
   {
     icon: Sparkles,
-    title: "AI-powered, human-perfected",
+    title: "Human perfection",
     description:
-      "We use AI to move faster and smarter — but every deliverable is finished by experienced creatives and engineers.",
+      "We are AI experts, but we believe in genuine human touch. Unless requested, we will NOT use AI for any brief.",
   },
 ]
 

@@ -21,7 +21,7 @@ export async function generateMetadata({
   const creator = await getCreatorBySlug(slug)
   if (!creator) return { title: "Creator not found" }
   return {
-    title: `${creator.name} — Creator`,
+    title: `${creator.name}, Creator`,
     description: creator.bio[0],
     alternates: { canonical: `/creators/${slug}` },
   }

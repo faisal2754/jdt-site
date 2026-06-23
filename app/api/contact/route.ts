@@ -91,7 +91,7 @@ export async function POST(req: Request) {
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
-    `Company: ${company || "—"}`,
+    `Company: ${company || "N/A"}`,
     `Service: ${service}`,
     "",
     "Message:",

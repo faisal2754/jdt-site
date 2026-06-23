@@ -26,8 +26,19 @@ export type Stat = { value: string; label: string }
 /** A social link on a creator profile. `handle` is optional in the existing data. */
 export type Social = { label: string; href: string; handle?: string }
 
+/**
+ * Which audience a service item is aimed at. When every item in a category is
+ * tagged, the public site renders the category as two columns
+ * ("For Brands" / "For Influencers") instead of a single flat list.
+ */
+export type ServiceAudience = 'brands' | 'influencers'
+
 /** A single service line item under a service category. */
-export type ServiceItem = { name: string; description: string }
+export type ServiceItem = {
+  name: string
+  description: string
+  audience?: ServiceAudience
+}
 
 // ---------------------------------------------------------------------------
 // Tables

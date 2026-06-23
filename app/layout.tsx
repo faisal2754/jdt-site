@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL('https://jdtpromotions.com'),
   title: {
-    default: 'JDT Promotions — Your brand’s creative powerhouse',
+    default: 'JDT Promotions: Your brand’s creative powerhouse',
     template: '%s | JDT Promotions',
   },
   description:
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'JDT Promotions',
-    title: 'JDT Promotions — Your brand’s creative powerhouse',
+    title: 'JDT Promotions: Your brand’s creative powerhouse',
     description:
       'World-class printing and design, talent management, and AI-powered development. One partner, unlimited possibilities.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JDT Promotions — Your brand’s creative powerhouse',
+    title: 'JDT Promotions: Your brand’s creative powerhouse',
     description:
       'World-class printing and design, talent management, and AI-powered development. One partner, unlimited possibilities.',
   },

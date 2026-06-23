@@ -5,6 +5,12 @@ import { slugSchema } from '@/lib/validation/creators'
 const serviceItemSchema = z.object({
   name: z.string().min(1, 'Service name is required.'),
   description: z.string().min(1, 'Service description is required.'),
+  // Optional audience tag. The admin form posts '' when unset, so coerce empty
+  // (and null/undefined) to undefined before the enum check.
+  audience: z.preprocess(
+    (v) => (v === '' || v == null ? undefined : v),
+    z.enum(['brands', 'influencers']).optional(),
+  ),
 })
 
 export const serviceCreateSchema = z.object({

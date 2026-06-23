@@ -15,7 +15,7 @@ import { RepeatableList } from './repeatable-list'
 import { Field, FormActions, FormSection } from './form-shell'
 import type { ServiceFormState } from '@/app/admin/(dashboard)/services/actions'
 
-/** Slugify a label the same shape the validator enforces: `Talent Management` → `talent-management`. */
+/** Slugify a label the same shape the validator enforces: `Influencer Marketing` → `influencer-marketing`. */
 function slugify(value: string): string {
   return value
     .normalize('NFKD')
@@ -31,7 +31,7 @@ export interface ServiceFormValues {
   tagline?: string
   description?: string
   imageUrl?: string
-  services?: { name: string; description: string }[]
+  services?: { name: string; description: string; audience?: string }[]
   sortOrder?: number
 }
 
@@ -117,7 +117,7 @@ export function ServiceForm({ action, defaultValues, mode }: ServiceFormProps) {
               name="label"
               value={label}
               onChange={(e) => onLabelChange(e.target.value)}
-              placeholder="Talent Management"
+              placeholder="Influencer Marketing"
               aria-invalid={fieldErrors.label ? true : undefined}
               autoComplete="off"
             />
@@ -143,7 +143,7 @@ export function ServiceForm({ action, defaultValues, mode }: ServiceFormProps) {
                   setSlugTouched(true)
                   setSlug(e.target.value)
                 }}
-                placeholder="talent-management"
+                placeholder="influencer-marketing"
                 aria-invalid={fieldErrors.slug ? true : undefined}
                 className="pl-8"
                 autoComplete="off"
@@ -212,7 +212,7 @@ export function ServiceForm({ action, defaultValues, mode }: ServiceFormProps) {
         <RepeatableList
           name="services"
           legend="Service items"
-          description="Each has a name and a short description."
+          description="Each has a name and a short description. Tag every item with an audience to split this category into 'For Brands' / 'For Influencers' columns."
           fields={[
             { key: 'name', label: 'Name', placeholder: 'Brand strategy' },
             {
@@ -220,6 +220,16 @@ export function ServiceForm({ action, defaultValues, mode }: ServiceFormProps) {
               label: 'Description',
               as: 'textarea',
               placeholder: 'A short description of this offering…',
+            },
+            {
+              key: 'audience',
+              label: 'Audience',
+              as: 'select',
+              options: [
+                { value: '', label: 'No split' },
+                { value: 'brands', label: 'For Brands' },
+                { value: 'influencers', label: 'For Influencers' },
+              ],
             },
           ]}
           defaultValue={defaultValues?.services}
@@ -240,7 +250,7 @@ export function ServiceForm({ action, defaultValues, mode }: ServiceFormProps) {
           label="Sort order"
           hint="lower = earlier"
           error={fieldErrors.sortOrder}
-          className="sm:w-40"
+          className="sm:w-52"
         >
           <Input
             id={`${formId}-sortOrder`}

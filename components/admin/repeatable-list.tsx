@@ -20,10 +20,12 @@ export interface RepeatableField {
   key: string
   label: string
   placeholder?: string
-  as?: 'input' | 'textarea'
+  as?: 'input' | 'textarea' | 'select'
   /** Optional sizing hint when several fields share a row. */
   grow?: number
   inputType?: string
+  /** Options for `as: 'select'`. The first blank-value option acts as "unset". */
+  options?: { value: string; label: string }[]
 }
 
 export type RepeatableRow = Record<string, string>
@@ -253,7 +255,23 @@ export function RepeatableList({
                             {field.label}
                           </Label>
                         ) : null}
-                        {field.as === 'textarea' ? (
+                        {field.as === 'select' ? (
+                          <select
+                            id={cellId}
+                            value={value}
+                            onChange={(e) =>
+                              updateCell(row._id, field.key, e.target.value)
+                            }
+                            aria-label={singleField ? field.label : undefined}
+                            className="h-8 w-full min-w-0 rounded-lg border border-input bg-card/40 px-2.5 py-1 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+                          >
+                            {(field.options ?? []).map((opt) => (
+                              <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </option>
+                            ))}
+                          </select>
+                        ) : field.as === 'textarea' ? (
                           <Textarea
                             id={cellId}
                             value={value}

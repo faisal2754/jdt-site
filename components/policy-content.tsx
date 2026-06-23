@@ -1,33 +1,35 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ContactButton } from "@/components/contact-button"
+import { motion } from "framer-motion";
+import { ContactButton } from "@/components/contact-button";
 
 export type PolicySection = {
-  heading: string
-  body: string[]
-}
+  heading: string;
+  body: string[];
+};
 
 function slugify(heading: string) {
   return heading
     .toLowerCase()
     .replace(/^\d+\.\s*/, "")
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")
+    .replace(/(^-|-$)/g, "");
 }
 
 function stripNumber(heading: string) {
-  return heading.replace(/^\d+\.\s*/, "")
+  return heading.replace(/^\d+\.\s*/, "");
 }
 
 export function PolicyContent({ sections }: { sections: PolicySection[] }) {
   return (
-    <main id="main" className="bg-background pb-24">
+    <main id="main" className="bg-background pt-16 pb-24 md:pt-20">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[260px_1fr] lg:gap-20">
         {/* Table of contents */}
         <nav aria-label="On this page" className="hidden lg:block">
           <div className="sticky top-28 flex flex-col gap-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">On this page</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+              On this page
+            </p>
             <ol className="flex flex-col border-l border-border">
               {sections.map((section, i) => (
                 <li key={section.heading}>
@@ -70,7 +72,10 @@ export function PolicyContent({ sections }: { sections: PolicySection[] }) {
                     {stripNumber(section.heading)}
                   </h2>
                   {section.body.map((paragraph, j) => (
-                    <p key={j} className="text-pretty text-sm leading-relaxed text-muted-foreground">
+                    <p
+                      key={j}
+                      className="text-pretty text-sm leading-relaxed text-muted-foreground"
+                    >
                       {paragraph}
                     </p>
                   ))}
@@ -88,9 +93,11 @@ export function PolicyContent({ sections }: { sections: PolicySection[] }) {
             className="mt-6 flex flex-col items-start justify-between gap-6 rounded-2xl bg-card p-8 shadow-card sm:flex-row sm:items-center"
           >
             <div className="flex flex-col gap-1">
-              <p className="text-base font-semibold text-foreground">Questions about this policy?</p>
+              <p className="text-base font-semibold text-foreground">
+                Questions about this policy?
+              </p>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                We&apos;re happy to clarify anything — just reach out.
+                We&apos;re happy to clarify anything, just reach out.
               </p>
             </div>
             <ContactButton size="sm" className="shrink-0" />
@@ -98,5 +105,5 @@ export function PolicyContent({ sections }: { sections: PolicySection[] }) {
         </div>
       </div>
     </main>
-  )
+  );
 }

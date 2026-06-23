@@ -19,12 +19,9 @@ export function CtaFooter() {
             className="flex flex-col items-center gap-8 rounded-3xl bg-card px-6 py-16 text-center shadow-card sm:px-12 lg:py-24"
           >
             <h2 className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-              Ready to make your brand{" "}
-              <span className="font-serif italic font-normal text-silver-bright">impossible to ignore?</span>
+              Got a project everyone else called{" "}
+              <span className="font-serif italic font-normal text-silver-bright">impossible?</span>
             </h2>
-            <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground">
-              Tell us about your project and we&apos;ll come back with a plan and quote — usually the same day.
-            </p>
             <div className="flex flex-col items-center gap-3">
               <ContactButton size="lg" />
               <a
@@ -48,8 +45,8 @@ export function CtaFooter() {
 const sitemapLinks = [
   { label: "Home", href: "/" },
   { label: "Printing & Design", href: "/services/printing-and-design" },
-  { label: "Talent Management", href: "/services/talent-management" },
-  { label: "AI & Development", href: "/services/ai-and-development" },
+  { label: "Influencer Marketing", href: "/services/influencer-marketing" },
+  { label: "Software Development", href: "/services/software-development" },
   { label: "Work", href: "/work" },
   { label: "Contact", href: "/contact" },
 ]

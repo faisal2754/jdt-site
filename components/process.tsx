@@ -6,24 +6,26 @@ const steps = [
   {
     number: "01",
     title: "Tell us what you need",
-    description: "Share your brief, deadline and budget. We'll come back the same day with a clear plan and quote.",
+    description:
+      "Send the brief, the deadline and the budget. Within 24 hours, you will have a clear plan and a quote back, no chasing needed.",
   },
   {
     number: "02",
     title: "We assemble the team",
     description:
-      "Designers, printers, talent or developers — the right specialists are matched to your project instantly.",
+      "Designers, printers, talent and developers, we line up exactly the right people for your brief, fast.",
   },
   {
     number: "03",
     title: "Review and refine",
-    description: "You get drafts fast and unlimited revisions until it's exactly right. No surprises, no jargon.",
+    description:
+      "Drafts land asap, with unlimited revisions until it's exactly right. No surprises. No misunderstandings.",
   },
   {
     number: "04",
     title: "Launch and grow",
     description:
-      "We deliver, you launch. Then we stick around for reprints, new campaigns and whatever comes next.",
+      "We deliver, you launch. Then we stick around for the next campaign, and anything you dream up after that.",
   },
 ]
 
@@ -46,10 +48,12 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="max-w-3xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            className="max-w-3xl font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           >
-            From brief to delivery in{" "}
-            <span className="font-serif italic font-normal text-silver-bright">four simple steps</span>
+            From concept to completion,{" "}
+            <span className="whitespace-nowrap">
+              in <span className="font-serif italic font-normal text-silver-bright">four simple steps</span>
+            </span>
           </motion.h2>
         </div>
 

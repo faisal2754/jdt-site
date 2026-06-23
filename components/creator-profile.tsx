@@ -20,7 +20,7 @@ export function CreatorProfile({
     <main id="main" className="pt-16 md:pt-20">
       <div className="mx-auto max-w-7xl px-6 py-10 lg:py-16">
         <Link
-          href="/services/talent-management#roster"
+          href="/services/influencer-marketing#roster"
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-[transform,color] duration-150 ease-smooth hover:text-foreground active:scale-[0.98]"
         >
           <ArrowLeft className="size-4" />
@@ -110,7 +110,7 @@ export function CreatorProfile({
               Other <span className="text-muted-foreground">creators</span>
             </h2>
             <Link
-              href="/services/talent-management#roster"
+              href="/services/influencer-marketing#roster"
               className="shrink-0 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-[transform,background-color] duration-150 ease-smooth hover:bg-secondary active:scale-[0.98]"
             >
               See all creators

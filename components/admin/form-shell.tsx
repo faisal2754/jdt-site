@@ -76,7 +76,7 @@ export function Field({
       <div className="flex items-baseline justify-between gap-2">
         <Label
           htmlFor={id}
-          className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground"
+          className="whitespace-nowrap text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground"
         >
           {label}
           {required ? (
@@ -86,7 +86,9 @@ export function Field({
           ) : null}
         </Label>
         {hint ? (
-          <span className="text-[0.7rem] text-muted-foreground/80">{hint}</span>
+          <span className="whitespace-nowrap text-[0.7rem] text-muted-foreground/80">
+            {hint}
+          </span>
         ) : null}
       </div>
       {children}

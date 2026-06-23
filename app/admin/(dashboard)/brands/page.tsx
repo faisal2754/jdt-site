@@ -23,7 +23,7 @@ export default async function BrandsListPage() {
       <AdminPageHeader
         eyebrow="Manage"
         title="Brands"
-        description="The trusted-by logos that scroll across the homepage marquee. Create and edit them inline — a logo is optional."
+        description="The trusted-by logos that scroll across the homepage marquee. Create and edit them inline; a logo is optional."
       />
 
       <BrandsList brands={brands} />

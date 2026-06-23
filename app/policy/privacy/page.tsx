@@ -37,7 +37,7 @@ const sections = [
   {
     heading: "4. Sharing of Information",
     body: [
-      "We only share personal information with third parties where necessary to deliver our services — for example, with print production partners or development infrastructure providers — and only to the extent required.",
+      "We only share personal information with third parties where necessary to deliver our services, for example with print production partners or development infrastructure providers, and only to the extent required.",
       "We may disclose information where required by law or to protect our legal rights.",
     ],
   },

@@ -11,7 +11,7 @@ import { getProjects } from "@/lib/queries/projects"
 export const metadata: Metadata = {
   title: "Our Work",
   description:
-    "Explore the JDT Promotions portfolio — printing and design, talent management, and AI and development projects delivered for brands across industries.",
+    "A few of the projects we're proudest of, across design, print, talent and development. Just a taste of what JDT Promotions is capable of.",
   alternates: { canonical: "/work" },
 }
 
@@ -30,9 +30,9 @@ export default async function WorkPage() {
       <main id="main">
         <PageHero
           eyebrow="Our work"
-          title="Selected"
-          accent="projects."
-          tagline="A growing portfolio across printing and design, talent management, and AI and development — every project delivered on brand and on time."
+          title="Projects we're"
+          accent="proud of"
+          tagline="A few of the projects we're proudest of, across design, print, talent and development. Just a taste of what we're capable of."
         />
         <WorkPortfolio projects={projects} />
         <WorkDivider />

@@ -123,7 +123,7 @@ function BrandFormBody({
         label="Sort order"
         hint="lower = earlier"
         error={fieldErrors.sortOrder}
-        className="w-40"
+        className="w-52"
       >
         <Input
           id={`${formId}-sortOrder`}
@@ -184,7 +184,7 @@ export function BrandDialog({
             {mode === 'create' ? 'New brand' : `Edit ${brand?.name}`}
           </DialogTitle>
           <DialogDescription>
-            Brands appear in the homepage marquee. A logo is optional — the name
+            Brands appear in the homepage marquee. A logo is optional; the name
             renders when there isn’t one.
           </DialogDescription>
         </DialogHeader>

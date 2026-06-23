@@ -99,7 +99,7 @@ export default async function AdminDashboardPage() {
           </span>
         </h1>
         <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Manage everything the public site renders — {totalRecords} live records
+          Manage everything the public site renders: {totalRecords} live records
           across talent, projects, services, and brands. Edits publish to the
           marketing site after saving.
         </p>

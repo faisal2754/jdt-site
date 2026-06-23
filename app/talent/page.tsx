@@ -9,9 +9,9 @@ import { breadcrumbSchema } from "@/lib/structured-data"
 import { getCreators } from "@/lib/queries/creators"
 
 export const metadata: Metadata = {
-  title: "Full Roster",
+  title: "Friends of JDT",
   description:
-    "Browse the full JDT Promotions talent roster — streamers, videographers, photographers, animators, illustrators, copywriters and more. Filter by discipline to find the right creator for your brand.",
+    "Talent we know and love: streamers, videographers, photographers, animators, illustrators, copywriters and more. Some officially ours, some simply friends. Browse by discipline to find the right face for your campaign.",
   alternates: { canonical: "/talent" },
 }
 
@@ -29,10 +29,10 @@ export default async function TalentPage() {
       <SiteHeader />
       <main id="main">
         <PageHero
-          eyebrow="The full roster"
-          title="Every creator"
-          accent="we represent."
-          tagline="Browse the complete roster by discipline. Filter to find exactly the kind of talent your campaign needs."
+          eyebrow="Friends of JDT"
+          title="Talent we"
+          accent="know and love"
+          tagline="Some are officially ours, some are simply friends, every one of them good at what they do. Browse by discipline to find the right face for your campaign."
         />
         <TalentRoster creators={creators} />
         <TalentRepresentation />

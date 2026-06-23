@@ -6,10 +6,10 @@
 // lives in `scripts/seed.ts`.
 export type { Project } from './db/schema'
 
-export type ProjectCategory = "Printing & Design" | "Talent Management" | "AI & Development"
+export type ProjectCategory = "Printing & Design" | "Influencer Marketing" | "Software Development"
 
 export const projectCategories: ProjectCategory[] = [
   "Printing & Design",
-  "Talent Management",
-  "AI & Development",
+  "Influencer Marketing",
+  "Software Development",
 ]

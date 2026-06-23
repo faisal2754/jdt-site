@@ -43,7 +43,7 @@ const sections = [
     ],
   },
   {
-    heading: "5. Talent Management",
+    heading: "5. Influencer Marketing",
     body: [
       "Talent represented by JDT Promotions are engaged under separate representation agreements. Brands wishing to engage our talent must do so through JDT Promotions. Direct engagement of represented talent that circumvents our agency may result in legal action.",
       "Campaign deliverables, usage rights, and exclusivity terms for talent partnerships are defined per engagement in a written agreement.",

@@ -9,7 +9,7 @@ import { breadcrumbSchema } from "@/lib/structured-data"
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with JDT Promotions by email, WhatsApp, Facebook or LinkedIn — or send us a message and we'll reply the same day.",
+    "Let's create something worth remembering. Get in touch with JDT Promotions by email, WhatsApp, Facebook or LinkedIn, or send us a message and we'll reply the same day.",
   alternates: { canonical: "/contact" },
 }
 
@@ -26,8 +26,8 @@ export default function ContactPage() {
       <main id="main">
         <PageHero
           eyebrow="Contact"
-          title="Let's make something"
-          accent="worth talking about."
+          title="Let's create something worth"
+          accent="remembering"
           tagline="Tell us about your project and we'll come back with a plan and quote."
         />
         <section className="bg-background py-16 lg:py-24">

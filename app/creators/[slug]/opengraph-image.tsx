@@ -12,7 +12,7 @@ export async function generateImageMetadata({
   const { slug } = await params
   const creator = await getCreatorBySlug(slug)
   const alt = creator
-    ? `${creator.name} — ${creator.category} | JDT Promotions`
+    ? `${creator.name}, ${creator.category} | JDT Promotions`
     : 'JDT Promotions creator'
   return [{ id: 'og', alt, size, contentType }]
 }

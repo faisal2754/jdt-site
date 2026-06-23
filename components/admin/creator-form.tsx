@@ -335,7 +335,7 @@ export function CreatorForm({
             label="Sort order"
             hint="lower = earlier"
             error={fieldErrors.sortOrder}
-            className="sm:w-40"
+            className="sm:w-52"
           >
             <Input
               id={`${formId}-sortOrder`}

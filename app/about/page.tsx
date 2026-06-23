@@ -8,7 +8,7 @@ import { breadcrumbSchema } from "@/lib/structured-data"
 export const metadata: Metadata = {
   title: "About",
   description:
-    "JDT Promotions was built by dreamers who were tired of searching for partners who could execute the impossible — so we became that partner. Print, talent and technology under one roof.",
+    "Before JDT was a studio, we were the brand searching for designers, printers and talent who could keep up with our imagination. So we built the partner we always wished we had. Print, talent and dev work under one roof.",
   alternates: { canonical: "/about" },
 }
 

@@ -68,7 +68,11 @@ type ServiceSeed = {
   tagline: string
   description: string
   image: string
-  services: { name: string; description: string }[]
+  services: {
+    name: string
+    description: string
+    audience?: 'brands' | 'influencers'
+  }[]
 }
 
 const creatorData: CreatorSeed[] = [
@@ -248,7 +252,7 @@ const creatorData: CreatorSeed[] = [
     image: "/images/creators/leo.png",
     bio: [
       "Leo Hart is a videographer and director whose cinematic eye has shaped commercials, music videos and brand films across the continent. He turns briefs into stories that move, with a craft honed on set after set.",
-      "As part of the JDT roster, Leo leads end-to-end production — from concept and shoot to the final grade — delivering broadcast-quality films for brands that want to be remembered.",
+      "As part of the JDT roster, Leo leads end-to-end production, from concept and shoot to the final grade, delivering broadcast-quality films for brands that want to be remembered.",
     ],
     stats: [
       { value: "120+", label: "Productions" },
@@ -269,7 +273,7 @@ const creatorData: CreatorSeed[] = [
     image: "/images/creators/nadia.png",
     bio: [
       "Nadia Khan is a motion designer and animator who brings brands to life through 2D and 3D animation, title sequences and explainer content. Her work balances technical polish with a real sense of play.",
-      "Through JDT, Nadia produces motion graphics for campaigns, social and broadcast — translating complex ideas into frames that feel effortless.",
+      "Through JDT, Nadia produces motion graphics for campaigns, social and broadcast, translating complex ideas into frames that feel effortless.",
     ],
     stats: [
       { value: "260+", label: "Projects" },
@@ -341,7 +345,7 @@ const projectData: ProjectSeed[] = [
     slug: "studio-talent-shoot",
     title: "Studio Talent Shoot",
     client: "NovaTech",
-    category: "Talent Management",
+    category: "Influencer Marketing",
     industry: "Technology",
     year: "2024",
     image: "/images/work-talent-1.png",
@@ -351,7 +355,7 @@ const projectData: ProjectSeed[] = [
     slug: "ecommerce-platform",
     title: "E-Commerce Platform",
     client: "Apex Retail",
-    category: "AI & Development",
+    category: "Software Development",
     industry: "E-commerce",
     year: "2025",
     image: "/images/work-ai-1.png",
@@ -371,7 +375,7 @@ const projectData: ProjectSeed[] = [
     slug: "live-brand-activation",
     title: "Live Brand Activation",
     client: "Pulse Fitness",
-    category: "Talent Management",
+    category: "Influencer Marketing",
     industry: "Fitness",
     year: "2025",
     image: "/images/work-talent-2.png",
@@ -381,7 +385,7 @@ const projectData: ProjectSeed[] = [
     slug: "customer-mobile-app",
     title: "Customer Mobile App",
     client: "Orion Logistics",
-    category: "AI & Development",
+    category: "Software Development",
     industry: "Logistics",
     year: "2025",
     image: "/images/work-ai-2.png",
@@ -401,7 +405,7 @@ const projectData: ProjectSeed[] = [
     slug: "tv-commercial-production",
     title: "TV Commercial Production",
     client: "Solstice Hotels",
-    category: "Talent Management",
+    category: "Influencer Marketing",
     industry: "Hospitality",
     year: "2024",
     image: "/images/work-talent-3.png",
@@ -411,7 +415,7 @@ const projectData: ProjectSeed[] = [
     slug: "analytics-dashboard",
     title: "Analytics Dashboard",
     client: "Bluepeak Finance",
-    category: "AI & Development",
+    category: "Software Development",
     industry: "Finance",
     year: "2025",
     image: "/images/work-ai-3.png",
@@ -425,61 +429,63 @@ const serviceData: ServiceSeed[] = [
     label: "Design, Print & Media",
     tagline: "From concept to print-ready, we make your brand impossible to ignore.",
     description:
-      "Great brands deserve flawless execution. From one-off displays to complete brand deployments, we manage the process from concept to delivery, ensuring every detail is refined, every colour is accurate, and every asset reflects the quality of your business.",
+      "The greatest brands deserve flawless execution. From a single brochure to complete brand deployments, we manage the process from concept to completion, where every asset is pixel perfect.",
     image: "/images/showcase-print.png",
     services: [
-      { name: "Brand Identity & Logo Design", description: "Logos, Brand Guidelines and Full Identity Systems" },
-      { name: "Litho & Large Format Printing", description: "Posters, Banners & Signage" },
-      { name: "Videography, Photography, Animation & Post-Production", description: "Directing, Sound Design, VFX & Storytelling" },
-      { name: "Bespoke Apparel & Merchandise", description: "Pattern Engineering, Custom Garments & Countless Branding Methods" },
-      { name: "Social Media & Digital Design", description: "End-to-End SMM, 2D, 3D, Motion Graphics, Posting and Copywriting" },
-      { name: "Bespoke Packaging, Labels & Stickers", description: "Bespoke Boxes, Bags & Carriers, Cartons & Stationery" },
-      { name: "Brochures, Catalogues & Publications", description: "Leaflets, Calendars, Magazines, Restaurant Menus & Catalogues" },
-      { name: "Custom Corporate Gifts", description: "Branded Gifts, Tailored Boxes that clients actually keep" },
-      { name: "Event Branding & Activations", description: "Shop-fitting, Exhibitions, Mall Activations & Experiential Events" },
-      { name: "Laser Cutting & Engraving", description: "Cutting, Engraving & Marking of Steel, Brass, Acrylic and Wood" },
-      { name: "Custom Display Units", description: "Stands, Counters and Point-of-Sale Displays" },
-      { name: "Luxury Print & Finishing", description: "Foiling, Embossing, Debossing & Finishes that leave an impression" },
+      { name: "Brand Identity & Logo Design", description: "Logos, guidelines and full identity systems" },
+      { name: "Litho & Large Format Printing", description: "Posters, banners and signage" },
+      { name: "Videography, Photography, Animation & Post-Production", description: "Directing, sound, VFX and storytelling" },
+      { name: "Bespoke Apparel & Merchandise", description: "Pattern engineering, custom garments and countless branding methods" },
+      { name: "Social Media & Digital Design", description: "End-to-end social: 2D, 3D, motion graphics, posting and copy" },
+      { name: "Bespoke Packaging, Labels & Stickers", description: "Boxes, bags, cartons and stickers" },
+      { name: "Brochures, Catalogues & Publications", description: "Leaflets, magazines, menus and catalogues" },
+      { name: "Custom Corporate Gifts", description: "Branded gifts and boxes that don't end up in a drawer" },
+      { name: "Event Branding & Activations", description: "Shop-fits, exhibitions and activations" },
+      { name: "Laser Cutting & Engraving", description: "Cutting, engraving and marking in steel, brass, acrylic and wood" },
+      { name: "Custom Display Units", description: "Stands, counters and POS displays" },
+      { name: "Luxury Print & Finishing", description: "Foiling, embossing, debossing, finishes that leave an impression" },
     ],
   },
   {
-    slug: "talent-management",
-    label: "Talent Management",
+    slug: "influencer-marketing",
+    label: "Influencer Marketing",
     tagline: "The right faces and voices for your brand, managed end to end.",
     description:
-      "We represent and manage a roster of creators, models, athletes and presenters — and we match them to brands that fit. From first brief to final deliverable, we handle contracts, logistics and campaign delivery so collaborations run smoothly.",
+      "We represent and manage a roster of creators, models, athletes and presenters, and we match them to brands that fit. We handle contracts, logistics and campaign delivery so all collaborations run smoothly.",
     image: "/images/showcase-talent.png",
     services: [
-      { name: "Influencer Management", description: "Sourcing, contracting and campaign delivery" },
-      { name: "Model & Talent Booking", description: "Models, actors and presenters for any brief" },
-      { name: "Brand Ambassadors", description: "Trained reps who live your brand" },
-      { name: "Event Staffing", description: "Promo teams, hosts and activation crews" },
-      { name: "Casting & Scouting", description: "Finding fresh faces that fit your vision" },
-      { name: "Content Creator Partnerships", description: "UGC creators matched to your audience" },
-      { name: "Campaign Management", description: "Full-service talent campaign execution" },
-      { name: "Social Media Management", description: "Channels run by people who get culture" },
-      { name: "Talent Development", description: "Coaching and growing emerging talent" },
-      { name: "Photo & Video Shoots", description: "Production days with talent included" },
+      // For Brands
+      { name: "Influencer Marketing", description: "We brief, coordinate and negotiate, so you don't have to", audience: "brands" },
+      { name: "Model & Talent Booking", description: "Models, presenters and actors for any brief", audience: "brands" },
+      { name: "UGC Content", description: "Concept, caption, post", audience: "brands" },
+      { name: "Campaign Planning", description: "Audience analysis and brand matching", audience: "brands" },
+      { name: "Statistic Reporting", description: "Impressions to conversions, receipts included", audience: "brands" },
+      // For Influencers
+      { name: "Negotiations & Sourcing", description: "We find the right brands and negotiate the deal for you", audience: "influencers" },
+      { name: "Invoicing & Payments", description: "Invoices sent, payments chased, you get paid", audience: "influencers" },
+      { name: "Scheduling & Logistics", description: "Managing of shoots, deadlines and travel", audience: "influencers" },
+      { name: "Talent Development", description: "Coaching and growth for talent on the up", audience: "influencers" },
+      { name: "Contract Management", description: "NDAs, contracts, compliance, all the dull stuff", audience: "influencers" },
     ],
   },
   {
-    slug: "ai-and-development",
-    label: "AI & Development",
-    tagline: "Modern builds and AI workflows that move faster than your competitors.",
+    slug: "software-development",
+    label: "Software Development",
+    tagline: "Modern builds and workflows that outpace your competitors.",
     description:
-      "Our engineers and AI specialists build the digital products that power modern brands — from conversion-focused websites to bespoke AI tooling. We ship fast, design around real users and keep everything fast, secure and online.",
+      "We build digital products that run modern brands, websites, apps, custom software and AI. We design around real people, and keep everything secure, stable and online long after launch.",
     image: "/images/showcase-ai.png",
     services: [
-      { name: "Web Design & Development", description: "Fast, beautiful websites built to convert" },
-      { name: "E-commerce Stores", description: "Online shops that are easy to run and scale" },
+      { name: "Web Design & Development", description: "Fast, good-looking websites built to convert" },
+      { name: "E-commerce Stores", description: "Online shops that are easy to run and built to scale" },
       { name: "Mobile Apps", description: "iOS and Android apps your customers love" },
-      { name: "AI Chatbots & Assistants", description: "Customer support that never sleeps" },
-      { name: "AI Content & Automation", description: "Workflows that save hours every week" },
+      { name: "AI Development & Chatbots", description: "Customer support that never sleeps" },
+      { name: "AI Automation & Consulting", description: "Workflows that save you hours every week" },
       { name: "AI Image & Video Generation", description: "On-brand visuals at the speed of AI" },
-      { name: "UI/UX Design", description: "Interfaces designed around real users" },
-      { name: "Custom Software", description: "Tools built for exactly how you work" },
-      { name: "SEO & Analytics", description: "Get found, measure everything" },
-      { name: "Hosting & Maintenance", description: "We keep it fast, secure and online" },
+      { name: "Web3 & Blockchain", description: "Smart contracts, audits, dApps and token launches" },
+      { name: "Custom Software", description: "Tools built for you, and only you" },
+      { name: "SEO & Analytics", description: "Get found, then measure what matters" },
+      { name: "Hosting & Maintenance", description: "Kept fast, secure and online" },
     ],
   },
 ]

@@ -26,6 +26,23 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     remotePatterns,
   },
+  async redirects() {
+    // Service slugs were rebranded; 308-redirect the old URLs so existing
+    // links, bookmarks and SEO keep working. (Any `#roster` hash is reattached
+    // by the browser after the redirect.)
+    return [
+      {
+        source: '/services/talent-management',
+        destination: '/services/influencer-marketing',
+        permanent: true,
+      },
+      {
+        source: '/services/ai-and-development',
+        destination: '/services/software-development',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig

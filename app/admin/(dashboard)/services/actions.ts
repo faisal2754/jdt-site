@@ -67,11 +67,9 @@ function readServicePayload(formData: FormData) {
     tagline: str('tagline'),
     description: str('description'),
     imageUrl: str('imageUrl'),
-    services: parseJson<{ name: string; description: string }[]>(
-      formData,
-      'services',
-      [],
-    ),
+    services: parseJson<
+      { name: string; description: string; audience?: string }[]
+    >(formData, 'services', []),
     sortOrder: Number.isNaN(sortOrder) ? 0 : sortOrder,
   }
 }

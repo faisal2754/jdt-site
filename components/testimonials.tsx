@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const testimonials = [
   {
     quote:
-      "JDT handled our entire product launch — packaging, event staff and the website. One brief, three services, zero stress. We'll never go back to juggling agencies.",
+      "JDT handled our entire product launch: packaging, event staff and the website. One brief, three services, zero stress. We'll never go back to juggling agencies.",
     name: "Sarah Mitchell",
     role: "Marketing Director, Atlas Fitness",
   },

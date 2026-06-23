@@ -8,7 +8,7 @@ const steps = [
     icon: Search,
     title: "We source & vet",
     description:
-      "Tell us the brief and we match you with the right talent from our roster — every creator is vetted for reliability, quality and fit before they ever reach you.",
+      "Tell us the brief and we match you with the right talent from our roster. Every creator is vetted for reliability, quality and fit before they ever reach you.",
   },
   {
     icon: FileSignature,
@@ -20,7 +20,7 @@ const steps = [
     icon: CalendarCheck,
     title: "We manage delivery",
     description:
-      "From booking to final assets, we keep the project on schedule so you only deal with results — not logistics.",
+      "From booking to final assets, we keep the project on schedule so you only deal with results, not logistics.",
   },
 ]
 

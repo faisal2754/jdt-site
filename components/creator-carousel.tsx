@@ -123,7 +123,7 @@ export function CreatorCarousel({ creators }: { creators: Creator[] }) {
             key={`${c.slug}-${i}`}
             href={`/creators/${c.slug}`}
             draggable={false}
-            aria-label={`${c.name} — ${c.category}`}
+            aria-label={`${c.name}, ${c.category}`}
             className="group w-56 shrink-0 transition-transform duration-150 ease-smooth active:scale-[0.98] sm:w-64"
           >
             <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-card shadow-card transition-shadow duration-300 ease-smooth group-hover:shadow-elevated">

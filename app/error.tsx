@@ -21,7 +21,7 @@ export default function Error({
         Something went wrong
       </h1>
       <p className="mt-4 max-w-md text-pretty text-base leading-relaxed text-muted-foreground">
-        Sorry — an unexpected error occurred on our end. Please try again.
+        Sorry, an unexpected error occurred on our end. Please try again.
       </p>
       <button
         type="button"
