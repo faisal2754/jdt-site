@@ -1,43 +1,43 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useReducedMotion } from "framer-motion"
-import type { Brand } from "@/lib/db/schema"
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import type { Brand } from "@/lib/db/schema";
 
-const SPEED = 60 // px per second — constant regardless of row length
+const SPEED = 30; // px per second — constant regardless of row length
 
 function MarqueeRow({
   brands,
   direction,
 }: {
-  brands: Brand[]
-  direction: "left" | "right"
+  brands: Brand[];
+  direction: "left" | "right";
 }) {
-  const shouldReduceMotion = useReducedMotion()
-  const containerRef = useRef<HTMLDivElement>(null)
-  const unitRef = useRef<HTMLDivElement>(null)
-  const [copies, setCopies] = useState(2)
-  const [unitWidth, setUnitWidth] = useState(0)
+  const shouldReduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const unitRef = useRef<HTMLDivElement>(null);
+  const [copies, setCopies] = useState(2);
+  const [unitWidth, setUnitWidth] = useState(0);
 
   useEffect(() => {
     const measure = () => {
-      const unit = unitRef.current?.offsetWidth ?? 0
-      const view = containerRef.current?.offsetWidth ?? 0
-      if (unit <= 0) return
-      setUnitWidth(unit)
+      const unit = unitRef.current?.offsetWidth ?? 0;
+      const view = containerRef.current?.offsetWidth ?? 0;
+      if (unit <= 0) return;
+      setUnitWidth(unit);
       // Enough copies that (copies - 1) units always overfill the viewport,
       // so there's never empty space at either end of the loop.
-      setCopies(Math.max(2, Math.ceil(view / unit) + 1))
-    }
-    measure()
-    window.addEventListener("resize", measure)
-    return () => window.removeEventListener("resize", measure)
-  }, [brands])
+      setCopies(Math.max(2, Math.ceil(view / unit) + 1));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [brands]);
 
   const animate =
     shouldReduceMotion || unitWidth === 0
       ? undefined
-      : { x: direction === "left" ? [0, -unitWidth] : [-unitWidth, 0] }
+      : { x: direction === "left" ? [0, -unitWidth] : [-unitWidth, 0] };
 
   return (
     <div
@@ -72,13 +72,13 @@ function MarqueeRow({
         ))}
       </motion.div>
     </div>
-  )
+  );
 }
 
 export function LogoMarquee({ brands }: { brands: Brand[] }) {
-  const mid = Math.ceil(brands.length / 2)
-  const topRow = brands.slice(0, mid)
-  const bottomRow = brands.slice(mid)
+  const mid = Math.ceil(brands.length / 2);
+  const topRow = brands.slice(0, mid);
+  const bottomRow = brands.slice(mid);
   return (
     <section
       aria-label="Brands that have built with us"
@@ -100,5 +100,5 @@ export function LogoMarquee({ brands }: { brands: Brand[] }) {
         <MarqueeRow brands={bottomRow} direction="left" />
       </div>
     </section>
-  )
+  );
 }
