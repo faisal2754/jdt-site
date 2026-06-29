@@ -90,7 +90,7 @@ function MarqueeRow({
                   loading="lazy"
                   decoding="async"
                   draggable={false}
-                  className="h-7 w-auto select-none object-contain opacity-60 transition-opacity duration-300 ease-smooth hover:opacity-100 md:h-8"
+                  className="h-6 w-auto select-none object-contain opacity-60 transition-opacity duration-300 ease-smooth hover:opacity-100 md:h-7"
                 />
               ) : (
                 <span
