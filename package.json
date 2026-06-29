@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+    "db:sync-brands": "tsx scripts/sync-brands.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1073.0",

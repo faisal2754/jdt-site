@@ -31,7 +31,20 @@ function MarqueeRow({
     };
     measure();
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    // Logos are variable-width <img>s that arrive asynchronously, so the first
+    // measure() can run before they have laid out. Re-measure whenever the
+    // measured unit's box changes (each logo load grows it) so unitWidth and
+    // the copy count settle to the correct values with no gaps in the loop.
+    const unit = unitRef.current;
+    const observer =
+      unit && typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(measure)
+        : null;
+    if (unit) observer?.observe(unit);
+    return () => {
+      window.removeEventListener("resize", measure);
+      observer?.disconnect();
+    };
   }, [brands]);
 
   const animate =
@@ -58,16 +71,36 @@ function MarqueeRow({
             key={c}
             ref={c === 0 ? unitRef : undefined}
             aria-hidden={c > 0}
-            className="flex items-center gap-16 pr-16"
+            // gap and pr-* MUST stay equal so the seam between repeated units
+            // keeps the same rhythm as items within a unit (seamless loop).
+            className="flex items-center gap-12 pr-12 md:gap-16 md:pr-16"
           >
-            {brands.map((brand, i) => (
-              <span
-                key={i}
-                className="whitespace-nowrap font-serif text-2xl italic text-silver transition-colors hover:text-foreground"
-              >
-                {brand.name}
-              </span>
-            ))}
+            {brands.map((brand, i) =>
+              brand.logoUrl ? (
+                // Plain <img>: logos are fixed-height / variable-width, and we
+                // have no per-logo intrinsic dimensions, so next/image (which
+                // wants width+height or fill) would either letterbox to a fixed
+                // box or need a positioned wrapper. h-* + w-auto + object-contain
+                // lets the browser size width from the file's own ratio.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={brand.logoUrl}
+                  alt={c === 0 ? brand.name : ""}
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                  className="h-7 w-auto select-none object-contain opacity-60 transition-opacity duration-300 ease-smooth hover:opacity-100 md:h-8"
+                />
+              ) : (
+                <span
+                  key={i}
+                  className="whitespace-nowrap font-serif text-2xl italic text-silver transition-colors duration-300 ease-smooth hover:text-foreground"
+                >
+                  {brand.name}
+                </span>
+              ),
+            )}
           </div>
         ))}
       </motion.div>
@@ -95,7 +128,7 @@ export function LogoMarquee({ brands }: { brands: Brand[] }) {
           Brands that have built with us
         </motion.p>
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-8">
         <MarqueeRow brands={topRow} direction="right" />
         <MarqueeRow brands={bottomRow} direction="left" />
       </div>

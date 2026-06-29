@@ -31,6 +31,9 @@ import type {
   NewServiceCategory,
 } from '../lib/db/schema'
 
+// Pure data (no lib/db side-effects), so a normal static import is safe here.
+import { seedBrands } from '../lib/data/brands'
+
 // ---------------------------------------------------------------------------
 // Source-of-truth seed data.
 //
@@ -490,21 +493,6 @@ const serviceData: ServiceSeed[] = [
   },
 ]
 
-const trustedBrands = [
-  "Northway Group",
-  "Velocity Motors",
-  "Cassidy & Co.",
-  "Bluestone Events",
-  "Harbour Lane",
-  "Atlas Fitness",
-  "Mara Beauty",
-  "Stockman Breweries",
-  "Pinnacle Realty",
-  "Fjord Outdoors",
-  "Lumen Health",
-  "Crown & Anchor",
-]
-
 async function seed() {
   // Lazy imports: env is guaranteed loaded by the time these run.
   const { db } = await import('../lib/db')
@@ -556,9 +544,9 @@ async function seed() {
     sortOrder: i,
   }))
 
-  const brandRows: NewBrand[] = trustedBrands.map((name, i) => ({
-    name,
-    logoUrl: null, // names render today; logos are added later via admin
+  const brandRows: NewBrand[] = seedBrands.map((b, i) => ({
+    name: b.name,
+    logoUrl: b.logoUrl,
     sortOrder: i,
   }))
 
@@ -591,7 +579,7 @@ async function seed() {
   console.log(`  creators:           ${insertedCreators.length} (source ${creatorData.length})`)
   console.log(`  projects:           ${insertedProjects.length} (source ${projectData.length})`)
   console.log(`  service_categories: ${insertedServices.length} (source ${serviceData.length})`)
-  console.log(`  brands:             ${insertedBrands.length} (source ${trustedBrands.length})`)
+  console.log(`  brands:             ${insertedBrands.length} (source ${seedBrands.length})`)
 }
 
 seed()

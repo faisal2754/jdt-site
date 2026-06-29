@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JDT Promotions — Colour System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #070707;
+    --card: #121212;
+    --fg: #f5f5f5;
+    --silver: #cecece;
+    --silver-gray: #989898;
+    --red: #e7000b;
+    --hair: rgba(255, 255, 255, 0.1);
+    --hair-soft: rgba(255, 255, 255, 0.06);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Grain + vignette atmosphere */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,0.05), transparent 60%),
+      radial-gradient(100% 100% at 50% 120%, rgba(0,0,0,0.6), transparent 50%);
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 3;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem) 6rem;
+  }
+
+  /* ───────── Masthead ───────── */
+  header { margin-bottom: clamp(4rem, 9vw, 7.5rem); }
+
+  .eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--silver-gray);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: rise 0.9s var(--ease) 0.1s forwards;
+  }
+  .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--hair), transparent);
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(3.4rem, 12vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 1.4rem 0 0;
+    opacity: 0;
+    animation: rise 1s var(--ease) 0.22s forwards;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--silver);
+  }
+
+  .lede {
+    margin-top: 1.8rem;
+    max-width: 34ch;
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+    color: var(--silver);
+    font-weight: 300;
+    opacity: 0;
+    animation: rise 1s var(--ease) 0.36s forwards;
+  }
+
+  /* ───────── Spectrum strip ───────── */
+  .spectrum {
+    display: flex;
+    height: 5px;
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 3rem;
+    box-shadow: 0 0 0 0.5px var(--hair);
+    opacity: 0;
+    animation: rise 1s var(--ease) 0.5s forwards;
+  }
+  .spectrum span { flex: 1; }
+
+  /* ───────── Section heads ───────── */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin: clamp(3.5rem, 7vw, 5.5rem) 0 2rem;
+  }
+  .section-head h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    letter-spacing: -0.01em;
+  }
+  .section-head .num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--silver-gray);
+    letter-spacing: 0.1em;
+  }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--hair);
+  }
+
+  /* ───────── Swatch grid ───────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--hair-soft);
+    border: 1px solid var(--hair-soft);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .swatch {
+    background: var(--card);
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.4s var(--ease);
+    opacity: 0;
+    animation: rise 0.8s var(--ease) forwards;
+  }
+  .swatch:hover { background: #161616; }
+
+  .chip {
+    height: 130px;
+    position: relative;
+    border-bottom: 1px solid var(--hair-soft);
+    overflow: hidden;
+  }
+  .chip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .body { padding: 1.25rem 1.4rem 1.5rem; }
+
+  .name {
+    font-family: 'Geist', sans-serif;
+    font-weight: 500;
+    font-size: 1.02rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    box-shadow: 0 0 0 0.5px var(--hair);
+    flex-shrink: 0;
+  }
+
+  .hex {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--silver);
+    margin-top: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+  }
+  .copy-hint {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--silver-gray);
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+  .swatch:hover .copy-hint { opacity: 1; }
+  .swatch.copied .copy-hint { opacity: 1; color: var(--fg); }
+
+  .usage {
+    margin-top: 0.9rem;
+    font-size: 0.86rem;
+    color: var(--silver-gray);
+    line-height: 1.5;
+  }
+  .tokens {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .token {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+    color: var(--silver);
+    padding: 0.25rem 0.55rem;
+    border: 1px solid var(--hair-soft);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* ───────── Footnote ───────── */
+  footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hair-soft);
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--silver-gray);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer a { color: var(--silver); text-decoration: none; border-bottom: 1px solid var(--hair); }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    [style*="opacity: 0"], .swatch, h1, .lede, .eyebrow, .spectrum { opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">JDT Promotions · Brand System</p>
+      <h1>Colour<br /><em>System</em></h1>
+      <p class="lede">A monochrome editorial palette. Near-black grounds, off-white type, silver for emphasis — and a single red reserved for when something breaks.</p>
+      <div class="spectrum">
+        <span style="background:#070707"></span>
+        <span style="background:#121212"></span>
+        <span style="background:#989898"></span>
+        <span style="background:#cecece"></span>
+        <span style="background:#f5f5f5"></span>
+        <span style="background:#e7000b; flex:0 0 14px"></span>
+      </div>
+    </header>
+
+    <!-- CORE -->
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>Core Palette</h2>
+      <span class="rule"></span>
+    </div>
+
+    <div class="grid" id="core">
+      <!-- swatches injected -->
+    </div>
+
+    <footer>
+      <span>Source · <a href="../app/globals.css">app/globals.css</a> (OKLCH tokens)</span>
+      <span>Click any swatch to copy its hex →</span>
+    </footer>
+  </div>
+
+<script>
+  const COLORS = [
+    {
+      name: 'Near Black',
+      hex: '#070707',
+      text: '#cecece',
+      usage: 'Page background. The ground everything sits on.',
+      tokens: ['--background', '--primary-foreground', '--accent-foreground'],
+    },
+    {
+      name: 'Card Dark',
+      hex: '#121212',
+      text: '#cecece',
+      usage: 'Cards, panels, raised surfaces lifted just off the background.',
+      tokens: ['--card', '--popover', '--secondary', '--muted'],
+    },
+    {
+      name: 'Silver Gray',
+      hex: '#989898',
+      text: '#070707',
+      usage: 'Muted & secondary text, captions, dividers, OG subtitles.',
+      tokens: ['--muted-foreground', '--ring'],
+    },
+    {
+      name: 'Silver',
+      hex: '#cecece',
+      text: '#070707',
+      usage: 'Accents, highlights, hover emphasis, italic display type.',
+      tokens: ['--accent', '--silver', '--silver-bright'],
+    },
+    {
+      name: 'Off White',
+      hex: '#f5f5f5',
+      text: '#070707',
+      usage: 'Primary text and primary actions — the loudest neutral.',
+      tokens: ['--foreground', '--primary', '--card-foreground'],
+    },
+    {
+      name: 'Signal Red',
+      hex: '#e7000b',
+      text: '#f5f5f5',
+      usage: 'Errors & destructive actions only. Never decorative.',
+      tokens: ['--destructive'],
+    },
+  ];
+
+  const grid = document.getElementById('core');
+
+  COLORS.forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'swatch';
+    el.style.animationDelay = (0.6 + i * 0.08) + 's';
+    el.innerHTML = `
+      <div class="chip" style="background:${c.hex}"></div>
+      <div class="body">
+        <div class="name">
+          <span class="dot" style="background:${c.hex}"></span>${c.name}
+        </div>
+        <div class="hex">
+          ${c.hex}
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <p class="usage">${c.usage}</p>
+        <div class="tokens">
+          ${c.tokens.map(t => `<span class="token">${t}</span>`).join('')}
+        </div>
+      </div>`;
+    el.addEventListener('click', () => {
+      navigator.clipboard?.writeText(c.hex);
+      el.classList.add('copied');
+      const hint = el.querySelector('.copy-hint');
+      const prev = hint.textContent;
+      hint.textContent = 'Copied ✓';
+      setTimeout(() => { hint.textContent = prev; el.classList.remove('copied'); }, 1300);
+    });
+    grid.appendChild(el);
+  });
+</script>
+</body>
+</html>
