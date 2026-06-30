@@ -445,7 +445,7 @@ const serviceData: ServiceSeed[] = [
       { name: "Custom Corporate Gifts", description: "Branded gifts and boxes that don't end up in a drawer" },
       { name: "Event Branding & Activations", description: "Shop-fits, exhibitions and activations" },
       { name: "Laser Cutting & Engraving", description: "Cutting, engraving and marking in steel, brass, acrylic and wood" },
-      { name: "Custom Display Units", description: "Stands, counters and POS displays" },
+      { name: "Vehicle Branding", description: "Luxury Vehicle PPF, Custom Wraps and Decals" },
       { name: "Luxury Print & Finishing", description: "Foiling, embossing, debossing, finishes that leave an impression" },
     ],
   },

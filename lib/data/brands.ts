@@ -25,6 +25,7 @@ export const seedBrands: { name: string; logoUrl: string }[] = [
   { name: 'Comic-Con', logoUrl: '/images/brands/comiccon.webp' },
   { name: 'Cooler Master', logoUrl: '/images/brands/coolermaster.webp' },
   { name: 'Dyson', logoUrl: '/images/brands/dyson.webp' },
+  { name: 'Feastables', logoUrl: '/images/brands/feastables.webp' },
   { name: 'Fractal', logoUrl: '/images/brands/fractal.webp' },
   { name: 'Gate', logoUrl: '/images/brands/gate.webp' },
   { name: 'Godmode', logoUrl: '/images/brands/godmode.webp' },
