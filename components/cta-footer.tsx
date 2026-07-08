@@ -64,8 +64,9 @@ const legalLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 lg:flex-row lg:justify-between">
+    <footer className="relative overflow-hidden border-t border-border bg-card">
+      <div aria-hidden="true" className="footer-pattern pointer-events-none absolute inset-0" />
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 lg:flex-row lg:justify-between">
         <div className="flex flex-wrap gap-16">
           <nav aria-label="Sitemap" className="flex flex-col gap-4">
             <p className="text-sm font-semibold text-foreground">Sitemap</p>
@@ -129,7 +130,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 pb-8">
+      <div className="relative mx-auto max-w-7xl px-6 pb-8">
         <p className="text-xs text-muted-foreground">
           &copy; {new Date().getFullYear()} JDT Promotions. All rights reserved.
         </p>

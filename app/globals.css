@@ -1,15 +1,15 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 /* Provided by the "shadcn" npm dependency — required at build; do not remove that package. */
-@import 'shadcn/tailwind.css';
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: var(--font-geist-sans), 'Geist Fallback';
+  --font-sans: var(--font-geist-sans), "Geist Fallback";
   --font-serif: var(--font-instrument-serif), Georgia, serif;
-  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
+  --font-mono: var(--font-geist-mono), "Geist Mono Fallback";
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -52,13 +52,11 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --shadow-card:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
-    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.5),
     0 0 0 0.5px rgba(255, 255, 255, 0.08);
   --shadow-elevated:
     inset 0 1px 0 0 rgba(255, 255, 255, 0.09),
-    0 12px 28px -10px rgba(0, 0, 0, 0.75),
-    0 2px 6px rgba(0, 0, 0, 0.5),
+    0 12px 28px -10px rgba(0, 0, 0, 0.75), 0 2px 6px rgba(0, 0, 0, 0.5),
     0 0 0 0.5px rgba(255, 255, 255, 0.1);
 }
 
@@ -109,7 +107,7 @@
   /* Tailwind v4 ships buttons with cursor: default — restore the pointer,
      and kill the 300ms mobile tap delay on everything interactive. */
   button:not(:disabled),
-  [role='button']:not(:disabled),
+  [role="button"]:not(:disabled),
   a,
   label[for],
   summary {
@@ -117,7 +115,7 @@
   }
   a,
   button,
-  [role='button'],
+  [role="button"],
   input,
   textarea,
   select,
@@ -144,6 +142,23 @@
   .skip-link:focus-visible {
     transform: translateY(0);
   }
+}
+
+/* Footer brand pattern — the SVG's fill is baked black, so it is used as an
+   alpha mask over a silver gradient instead of a background-image; the tint
+   then comes from the theme, fading up from the bottom edge. */
+.footer-pattern {
+  background-image: linear-gradient(
+    to bottom,
+    oklch(0.97 0 0 / 0.01),
+    oklch(0.97 0 0 / 0.025)
+  );
+  -webkit-mask-image: url("/images/footer-bg.svg");
+  mask-image: url("/images/footer-bg.svg");
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 520px auto;
+  mask-size: 520px auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

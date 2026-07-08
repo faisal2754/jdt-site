@@ -124,17 +124,32 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Scrolling collage */}
+        {/* Scrolling collage + mascot */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative h-[420px] w-full lg:h-[560px] lg:flex-1"
+          className="relative flex h-[420px] w-full items-end gap-4 lg:h-[560px] lg:flex-1"
         >
-          <div className="grid h-full grid-cols-2 gap-4 [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
+          <div className="grid h-full flex-1 grid-cols-2 gap-4 [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
             <ScrollColumn images={columnOne} duration={38} priority />
             <ScrollColumn images={columnTwo} duration={46} reverse />
           </div>
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="hidden h-full w-auto shrink-0 sm:block"
+          >
+            <Image
+              src="/characters/smoking-jack.svg"
+              alt="JDT Promotions mascot"
+              width={753}
+              height={1620}
+              className="h-full w-auto object-contain object-bottom"
+              priority
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>
