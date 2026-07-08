@@ -48,6 +48,7 @@ const sitemapLinks = [
   { label: "Influencer Marketing", href: "/services/influencer-marketing" },
   { label: "Software Development", href: "/services/software-development" },
   { label: "Work", href: "/work" },
+  { label: "Artwork", href: "/artwork" },
   { label: "Contact", href: "/contact" },
 ]
 

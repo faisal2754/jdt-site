@@ -18,3 +18,6 @@ node_modules
 *:Zone.Identifier
 # TypeScript incremental build cache
 tsconfig.tsbuildinfo
+
+# Raw artwork sources (~97MB) — processed into public/artwork/ by pnpm build:artwork
+/artwork/

@@ -27,6 +27,7 @@ export function SiteHeaderClient({
 
   const isServicesActive = pathname.startsWith('/services')
   const isWorkActive = pathname === '/work'
+  const isArtworkActive = pathname === '/artwork'
   const isAboutActive = pathname === '/about'
 
   return (
@@ -109,6 +110,15 @@ export function SiteHeaderClient({
             Our work
           </Link>
           <Link
+            href="/artwork"
+            aria-current={isArtworkActive ? 'page' : undefined}
+            className={`rounded-full px-4 py-2 text-sm transition active:scale-[0.98] duration-150 ease-smooth ${
+              isArtworkActive ? 'bg-muted text-foreground' : 'text-foreground/90 hover:bg-muted'
+            }`}
+          >
+            Artwork
+          </Link>
+          <Link
             href="/about"
             aria-current={isAboutActive ? 'page' : undefined}
             className={`rounded-full px-4 py-2 text-sm transition active:scale-[0.98] duration-150 ease-smooth ${
@@ -176,6 +186,16 @@ export function SiteHeaderClient({
                   }`}
                 >
                   Our work
+                </Link>
+                <Link
+                  href="/artwork"
+                  onClick={() => setMobileOpen(false)}
+                  aria-current={isArtworkActive ? 'page' : undefined}
+                  className={`rounded-md px-2 py-3 text-base transition-transform duration-150 ease-smooth active:scale-[0.98] ${
+                    isArtworkActive ? 'bg-muted text-foreground' : 'text-foreground'
+                  }`}
+                >
+                  Artwork
                 </Link>
                 <Link
                   href="/about"

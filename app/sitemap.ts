@@ -23,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const primaryRoutes = [
     '/about',
     '/work',
+    '/artwork',
     '/talent',
     '/contact',
     '/policy/privacy',

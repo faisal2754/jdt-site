@@ -1,0 +1,247 @@
+{
+  "atlasSize": 7,
+  "cellSize": 1024,
+  "items": [
+    {
+      "index": 0,
+      "aspect": 0.5625,
+      "isVideo": true,
+      "video": "/artwork/aasim.mp4"
+    },
+    {
+      "index": 1,
+      "aspect": 0.541394,
+      "isVideo": false
+    },
+    {
+      "index": 2,
+      "aspect": 0.876045,
+      "isVideo": false
+    },
+    {
+      "index": 3,
+      "aspect": 1.5,
+      "isVideo": false
+    },
+    {
+      "index": 4,
+      "aspect": 0.666667,
+      "isVideo": false
+    },
+    {
+      "index": 5,
+      "aspect": 1.5,
+      "isVideo": false
+    },
+    {
+      "index": 6,
+      "aspect": 1.5,
+      "isVideo": false
+    },
+    {
+      "index": 7,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 8,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 9,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 10,
+      "aspect": 1.5,
+      "isVideo": false
+    },
+    {
+      "index": 11,
+      "aspect": 1.5,
+      "isVideo": false
+    },
+    {
+      "index": 12,
+      "aspect": 0.555423,
+      "isVideo": false
+    },
+    {
+      "index": 13,
+      "aspect": 0.659139,
+      "isVideo": false
+    },
+    {
+      "index": 14,
+      "aspect": 0.668776,
+      "isVideo": false
+    },
+    {
+      "index": 15,
+      "aspect": 0.495566,
+      "isVideo": false
+    },
+    {
+      "index": 16,
+      "aspect": 1.151685,
+      "isVideo": false
+    },
+    {
+      "index": 17,
+      "aspect": 1.584718,
+      "isVideo": false
+    },
+    {
+      "index": 18,
+      "aspect": 0.538676,
+      "isVideo": false
+    },
+    {
+      "index": 19,
+      "aspect": 0.540823,
+      "isVideo": false
+    },
+    {
+      "index": 20,
+      "aspect": 1.5209,
+      "isVideo": false
+    },
+    {
+      "index": 21,
+      "aspect": 0.666667,
+      "isVideo": false
+    },
+    {
+      "index": 22,
+      "aspect": 1.501592,
+      "isVideo": false
+    },
+    {
+      "index": 23,
+      "aspect": 0.748019,
+      "isVideo": false
+    },
+    {
+      "index": 24,
+      "aspect": 1.523349,
+      "isVideo": false
+    },
+    {
+      "index": 25,
+      "aspect": 1.335694,
+      "isVideo": false
+    },
+    {
+      "index": 26,
+      "aspect": 1.268817,
+      "isVideo": false
+    },
+    {
+      "index": 27,
+      "aspect": 1.254642,
+      "isVideo": false
+    },
+    {
+      "index": 28,
+      "aspect": 1.206117,
+      "isVideo": false
+    },
+    {
+      "index": 29,
+      "aspect": 0.559194,
+      "isVideo": false
+    },
+    {
+      "index": 30,
+      "aspect": 1.636364,
+      "isVideo": false
+    },
+    {
+      "index": 31,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 32,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 33,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 34,
+      "aspect": 1.499531,
+      "isVideo": false
+    },
+    {
+      "index": 35,
+      "aspect": 1.499531,
+      "isVideo": false
+    },
+    {
+      "index": 36,
+      "aspect": 1.333333,
+      "isVideo": false
+    },
+    {
+      "index": 37,
+      "aspect": 1.777778,
+      "isVideo": false
+    },
+    {
+      "index": 38,
+      "aspect": 1.777778,
+      "isVideo": false
+    },
+    {
+      "index": 39,
+      "aspect": 1.789386,
+      "isVideo": false
+    },
+    {
+      "index": 40,
+      "aspect": 1.779755,
+      "isVideo": false
+    },
+    {
+      "index": 41,
+      "aspect": 1.779755,
+      "isVideo": false
+    },
+    {
+      "index": 42,
+      "aspect": 0.75,
+      "isVideo": false
+    },
+    {
+      "index": 43,
+      "aspect": 0.75,
+      "isVideo": false
+    },
+    {
+      "index": 44,
+      "aspect": 0.56,
+      "isVideo": false
+    },
+    {
+      "index": 45,
+      "aspect": 0.5625,
+      "isVideo": false
+    },
+    {
+      "index": 46,
+      "aspect": 0.75,
+      "isVideo": false
+    },
+    {
+      "index": 47,
+      "aspect": 0.657143,
+      "isVideo": false
+    }
+  ]
+}

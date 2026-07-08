@@ -10,6 +10,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx scripts/seed.ts",
+    "build:artwork": "tsx scripts/build-artwork-atlas.ts",
     "db:sync-brands": "tsx scripts/sync-brands.ts"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "shadcn": "^4.8.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
+    "three": "^0.185.1",
     "tw-animate-css": "^1.4.0",
     "zod": "^4.4.3"
   },
@@ -40,11 +42,13 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.185.0",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.9",
     "postcss": "^8.5",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4.2.0",
     "tsx": "^4.22.4",
     "typescript": "5.7.3"
