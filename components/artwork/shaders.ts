@@ -31,7 +31,6 @@ uniform float uShineProgress;
 uniform vec2 uActiveVideoCell;
 uniform float uIntroProgress;
 uniform vec2 uIntroCenter;
-uniform float uTime;
 
 varying vec2 vUv;
 
@@ -40,7 +39,7 @@ const float CELL_GAP = 0.06;
 const float LAYOUT_WIDTH = 64.0;
 // hover frame: on hover the image scales down UNIFORMLY about the cell center
 // (aspect ratio is preserved exactly at every intensity) and a constant-
-// thickness gradient ring hugs the scaled image edge, flush against it — no
+// thickness white ring hugs the scaled image edge, flush against it — no
 // gap. All sizes are world units (columnWidth = 1); world axes scale uniformly
 // to screen, so the ring reads with even thickness on all four sides.
 const float BORDER_WIDTH = 0.0115;
@@ -50,53 +49,9 @@ const float VIGNETTE_RADIUS = 1.3;
 const float VIGNETTE_SOFTNESS = 0.5;
 const vec3 BACKGROUND = vec3(0.008);
 
-// "Holo Foil" border gradient (linear-light; sRGB conversion happens later in
-// colorspace_fragment): spectral interference bands over a drifting fbm film-
-// thickness field, desaturating to foil silver at grazing bands, with sparse
-// traveling glints. Sampled on the unit circle around the cell center so it is
-// seamless around the frame perimeter.
-float fgHash(vec2 p) {
-  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-}
-float fgNoise(vec2 p) {
-  vec2 i = floor(p);
-  vec2 f = fract(p);
-  vec2 u = f * f * (3.0 - 2.0 * f);
-  return mix(
-    mix(fgHash(i), fgHash(i + vec2(1.0, 0.0)), u.x),
-    mix(fgHash(i + vec2(0.0, 1.0)), fgHash(i + vec2(1.0, 1.0)), u.x),
-    u.y);
-}
-float fgFbm(vec2 p) {
-  float v = 0.0;
-  float a = 0.5;
-  for (int i = 0; i < 3; i++) {
-    v += a * fgNoise(p);
-    p = p * 2.13 + 17.31;
-    a *= 0.5;
-  }
-  return v;
-}
-
-vec3 frameGradient(vec2 cellUv) {
-  vec2 rel = cellUv - 0.5;
-  float ang = atan(rel.y, rel.x + 1e-6);
-  // sample noise on the unit circle -> seamless around the perimeter
-  vec2 ring = vec2(cos(ang), sin(ang));
-  // drifting film-thickness field: perimeter phase + fbm warp
-  float warp = fgFbm(ring * 2.2 + uTime * 0.10);
-  float d = ang * 0.47746483 + warp * 1.55 - uTime * 0.05; // 3 bands / lap
-  // spectral interference colors: phase-offset cosine palette
-  vec3 spec = 0.5 + 0.5 * cos(6.2831853 * (d + vec3(0.00, 0.33, 0.67)));
-  spec = pow(spec, vec3(1.7)) * vec3(1.00, 0.86, 1.08); // deep, slightly cool
-  // grazing bands desaturate toward foil silver
-  float graze = smoothstep(0.38, 0.80, fgNoise(ring * 2.8 - uTime * 0.07 + 5.2));
-  vec3 silver = vec3(0.72, 0.74, 0.80);
-  vec3 col = mix(spec * 1.25, silver, graze * 0.72);
-  // sparse traveling glints
-  float glint = smoothstep(0.72, 0.97, fgNoise(ring * 4.5 + uTime * 0.22 + 9.7));
-  return col + glint * vec3(0.9, 0.95, 1.0);
-}
+// frame color (linear-light; sRGB conversion happens later in
+// colorspace_fragment): plain white
+const vec3 FRAME_COLOR = vec3(1.0);
 
 vec4 layoutTexel(float x, float row) {
   return texture2D(uLayout, vec2((x + 0.5) / LAYOUT_WIDTH, (row + 0.5) / uLayoutRows));
@@ -199,7 +154,7 @@ vec3 sampleGrid(vec2 world) {
     color += shine * 0.45 * hover;
   }
 
-  // gradient frame: a constant-thickness ring (t on all four sides, square
+  // frame: a constant-thickness ring (t on all four sides, square
   // corners) hugging the scaled image edge, flush against it — no gap.
   // Opacity follows this cell's hover intensity so it collapses on the
   // previous cell while it grows on the new one.
@@ -210,11 +165,7 @@ vec3 sampleGrid(vec2 world) {
     float d = max(q.x, q.y);
     float pastImage = smoothstep(-FRAME_AA, FRAME_AA, d);
     float insideOuter = 1.0 - smoothstep(t - FRAME_AA, t + FRAME_AA, d);
-    // holo-foil gradient anchored to the UNSCALED cell UV so it spans the
-    // whole frame perimeter and stays put as the image insets (drift/glint
-    // motion comes from uTime inside frameGradient)
-    vec3 border = frameGradient(cellPos / cellSize);
-    color = mix(color, border, pastImage * insideOuter * frameIntensity);
+    color = mix(color, FRAME_COLOR, pastImage * insideOuter * frameIntensity);
     // beyond the frame's outer edge (longer-axis surplus): background, so it
     // merges with the inter-cell gap
     color = mix(color, BACKGROUND, pastImage * (1.0 - insideOuter));

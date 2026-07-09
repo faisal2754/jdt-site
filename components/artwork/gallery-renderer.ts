@@ -119,7 +119,6 @@ export class GalleryRenderer {
   private introStarted = false
   private introStart = -1 // anchored on the first ticked frame after a texture lands
   private rafId = 0
-  private lastTickAt = -1 // -1 until the first ticked frame
   private hidden = false
   private contextLost = false
   private rafActive = true
@@ -170,7 +169,6 @@ export class GalleryRenderer {
       uActiveVideoCell: { value: new Vector2(-1, -1) },
       uIntroProgress: { value: 0.0 },
       uIntroCenter: { value: new Vector2(0, 0) },
-      uTime: { value: 0.0 },
     }
 
     this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1)
@@ -575,15 +573,6 @@ export class GalleryRenderer {
     if (this.disposed || !this.rafActive) return
     this.rafId = requestAnimationFrame(this.tick)
     const now = performance.now()
-
-    // uTime drives the border gradient drift; the delta is clamped so pauses
-    // (tab hidden, context loss) don't jump it, and it freezes entirely under
-    // reduced motion so the gradient holds still
-    const delta = this.lastTickAt < 0 ? 0 : Math.min(now - this.lastTickAt, 100)
-    this.lastTickAt = now
-    if (!this.reducedMotion) {
-      this.uniforms.uTime.value = (this.uniforms.uTime.value as number) + delta / 1000
-    }
 
     // intro clock anchors on the first ticked frame after an atlas landed, so
     // texture decode/upload stalls never eat into the 2s window
