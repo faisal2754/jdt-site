@@ -15,15 +15,8 @@ export const site = {
   email: "hello@jdtpromotions.com",
   // The phone has two representations: a human-readable display value and a
   // wa.me href. Consumers pick whichever they need.
-  // TODO(owner): replace placeholder phone number with the real WhatsApp number (display + href).
-  phone: "+27 82 123 4567",
-  whatsapp: "https://wa.me/27821234567",
+  phone: "+27 76 897 4866",
+  whatsapp: "https://wa.me/27768974866",
   logo: "/images/jdt-logo.png",
-  socials: {
-    // TODO(owner): replace placeholder Facebook URL with the real account.
-    facebook: "https://facebook.com/jdtpromotions",
-    // TODO(owner): replace placeholder LinkedIn URL with the real company page.
-    linkedin: "https://linkedin.com/company/jdtpromotions",
-  },
   areaServed: { country: "ZA", region: "Gauteng" },
 } as const

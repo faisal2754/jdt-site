@@ -9,7 +9,7 @@ import type { ArtworkManifest } from "@/components/artwork/layout"
 import manifestJson from "@/public/artwork/manifest.json"
 
 export const metadata: Metadata = {
-  title: "Artwork",
+  title: "Portfolio",
   description:
     "An infinite canvas of artwork, design and illustration from the JDT Promotions studio. Drag to explore.",
   alternates: { canonical: "/artwork" },
@@ -23,12 +23,12 @@ export default function ArtworkPage() {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", path: "/" },
-          { name: "Artwork", path: "/artwork" },
+          { name: "Portfolio", path: "/artwork" },
         ])}
       />
       <SiteHeader />
       <main id="main" className="relative h-dvh w-full overflow-hidden bg-black">
-        <h1 className="sr-only">Artwork</h1>
+        <h1 className="sr-only">Portfolio</h1>
         <p className="sr-only">
           An infinite canvas of artwork, design and illustration from the JDT Promotions studio.
         </p>

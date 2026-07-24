@@ -4,23 +4,18 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight, Check } from "lucide-react"
-import type { Creator } from "@/lib/creators"
 import type { ServiceCategory } from "@/lib/services"
 import { groupServicesByAudience } from "@/lib/services"
-import { CreatorCarousel } from "@/components/creator-carousel"
 import { ContactButton } from "@/components/contact-button"
 
 export function ServicePageContent({
   category,
   services,
-  creators,
 }: {
   category: ServiceCategory
   services: ServiceCategory[]
-  creators: Creator[]
 }) {
   const others = services.filter((c) => c.id !== category.id)
-  const isTalent = category.slug === "influencer-marketing"
   const audienceGroups = groupServicesByAudience(category.services)
 
   return (
@@ -43,12 +38,6 @@ export function ServicePageContent({
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <ContactButton href={`/contact?service=${category.slug}`} />
-              <Link
-                href="#roster"
-                className={`rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-[transform,background-color] duration-150 ease-smooth hover:bg-secondary active:scale-[0.98] ${isTalent ? "" : "hidden"}`}
-              >
-                Meet our creators
-              </Link>
             </div>
           </motion.div>
 
@@ -63,6 +52,7 @@ export function ServicePageContent({
               alt={`${category.label} showcase`}
               fill
               sizes="(max-width: 1024px) 100vw, 600px"
+              quality={90}
               className="object-cover"
               priority
             />
@@ -144,22 +134,6 @@ export function ServicePageContent({
           </div>
         </div>
       </section>
-
-      {/* Talent: creator roster */}
-      {isTalent && (
-        <section id="roster" className="scroll-mt-24 border-b border-border bg-background">
-          <div className="mx-auto max-w-7xl px-6 pt-16 lg:pt-24">
-            <div className="flex flex-col gap-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">the company we keep</p>
-              <h2 className="max-w-2xl text-balance font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Talent that brands{" "}
-                <span className="font-serif italic font-normal text-silver-bright">trust</span>
-              </h2>
-            </div>
-          </div>
-          <CreatorCarousel creators={creators} />
-        </section>
-      )}
 
       {/* Other services */}
       <section className="bg-card py-16 lg:py-24">

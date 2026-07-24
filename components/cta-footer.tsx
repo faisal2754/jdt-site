@@ -47,15 +47,12 @@ const sitemapLinks = [
   { label: "Printing & Design", href: "/services/printing-and-design" },
   { label: "Influencer Marketing", href: "/services/influencer-marketing" },
   { label: "Software Development", href: "/services/software-development" },
-  { label: "Work", href: "/work" },
-  { label: "Artwork", href: "/artwork" },
+  { label: "Portfolio", href: "/artwork" },
   { label: "Contact", href: "/contact" },
 ]
 
 const socialLinks = [
   { label: "WhatsApp", href: site.whatsapp },
-  { label: "Facebook", href: site.socials.facebook },
-  { label: "LinkedIn", href: site.socials.linkedin },
 ]
 
 const legalLinks = [

@@ -69,6 +69,7 @@ export function ServicesTabs({ serviceCategories }: { serviceCategories: Service
                   alt={`${category.label} showcase`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 480px"
+                  quality={90}
                   className="object-cover"
                 />
               </div>

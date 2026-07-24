@@ -341,7 +341,7 @@ const projectData: ProjectSeed[] = [
     category: "Printing & Design",
     industry: "Retail",
     year: "2024",
-    image: "/images/work-print-1.png",
+    image: "/images/work-featured-print.jpg",
     summary: "A full print campaign spanning flyers, brochures and in-store collateral for a national retail launch.",
   },
   {
@@ -351,7 +351,7 @@ const projectData: ProjectSeed[] = [
     category: "Influencer Marketing",
     industry: "Technology",
     year: "2024",
-    image: "/images/work-talent-1.png",
+    image: "/images/work-featured-talent.jpg",
     summary: "Casting, direction and production for a flagship brand campaign featuring our managed talent roster.",
   },
   {
@@ -361,7 +361,7 @@ const projectData: ProjectSeed[] = [
     category: "Software Development",
     industry: "E-commerce",
     year: "2025",
-    image: "/images/work-ai-1.png",
+    image: "/images/work-featured-software.jpg",
     summary: "A custom storefront with AI-powered product recommendations and a headless content backend.",
   },
   {
@@ -433,7 +433,7 @@ const serviceData: ServiceSeed[] = [
     tagline: "From concept to print-ready, we make your brand impossible to ignore.",
     description:
       "The greatest brands deserve flawless execution. From a single brochure to complete brand deployments, we manage the process from concept to completion, where every asset is pixel perfect.",
-    image: "/images/showcase-print.png",
+    image: "/images/showcase-design-print-media.png",
     services: [
       { name: "Brand Identity & Logo Design", description: "Logos, guidelines and full identity systems" },
       { name: "Litho & Large Format Printing", description: "Posters, banners and signage" },
@@ -455,7 +455,7 @@ const serviceData: ServiceSeed[] = [
     tagline: "The right faces and voices for your brand, managed end to end.",
     description:
       "We represent and manage a roster of creators, models, athletes and presenters, and we match them to brands that fit. We handle contracts, logistics and campaign delivery so all collaborations run smoothly.",
-    image: "/images/showcase-talent.png",
+    image: "/images/showcase-influencer-marketing.png",
     services: [
       // For Brands
       { name: "Influencer Marketing", description: "We brief, coordinate and negotiate, so you don't have to", audience: "brands" },
@@ -477,7 +477,7 @@ const serviceData: ServiceSeed[] = [
     tagline: "Modern builds and workflows that outpace your competitors.",
     description:
       "We build digital products that run modern brands, websites, apps, custom software and AI. We design around real people, and keep everything secure, stable and online long after launch.",
-    image: "/images/showcase-ai.png",
+    image: "/images/showcase-software-development.png",
     services: [
       { name: "Web Design & Development", description: "Fast, good-looking websites built to convert" },
       { name: "E-commerce Stores", description: "Online shops that are easy to run and built to scale" },

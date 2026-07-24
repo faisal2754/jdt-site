@@ -6,7 +6,6 @@ import { CtaFooter } from "@/components/cta-footer"
 import { JsonLd } from "@/components/json-ld"
 import { serviceSchema, breadcrumbSchema } from "@/lib/structured-data"
 import { getServices, getServiceBySlug } from "@/lib/queries/services"
-import { getCreators } from "@/lib/queries/creators"
 
 export async function generateStaticParams() {
   const services = await getServices()
@@ -34,10 +33,9 @@ export default async function ServicePage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const [category, services, creators] = await Promise.all([
+  const [category, services] = await Promise.all([
     getServiceBySlug(slug),
     getServices(),
-    getCreators(),
   ])
   if (!category) notFound()
 
@@ -53,11 +51,7 @@ export default async function ServicePage({
         ]}
       />
       <SiteHeader />
-      <ServicePageContent
-        category={category}
-        services={services}
-        creators={creators}
-      />
+      <ServicePageContent category={category} services={services} />
       <CtaFooter />
     </>
   )

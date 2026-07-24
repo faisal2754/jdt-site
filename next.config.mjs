@@ -24,6 +24,9 @@ const nextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    // Photography with flat gradient backdrops bands visibly at the default
+    // quality (75), so showcase/work/hero imagery requests 90.
+    qualities: [75, 90],
     remotePatterns,
   },
   async redirects() {

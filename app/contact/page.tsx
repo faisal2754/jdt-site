@@ -9,7 +9,7 @@ import { breadcrumbSchema } from "@/lib/structured-data"
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Let's create something worth remembering. Get in touch with JDT Promotions by email, WhatsApp, Facebook or LinkedIn, or send us a message and we'll reply the same day.",
+    "Let's create something worth remembering. Get in touch with JDT Promotions by email or WhatsApp, or send us a message and we'll reply the same day.",
   alternates: { canonical: "/contact" },
 }
 

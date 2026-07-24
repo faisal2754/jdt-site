@@ -37,7 +37,6 @@ export function organizationSchema(): JsonLd {
     url: site.url,
     logo: `${site.url}${site.logo}`,
     description: site.description,
-    ...sameAs([site.socials.facebook, site.socials.linkedin]),
     contactPoint: {
       "@type": "ContactPoint",
       email: site.email,

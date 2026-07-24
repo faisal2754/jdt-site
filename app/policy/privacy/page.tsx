@@ -62,7 +62,7 @@ const sections = [
   {
     heading: "8. Third-Party Links",
     body: [
-      "Our website may contain links to external platforms such as WhatsApp, Facebook, and LinkedIn. Those platforms operate under their own privacy policies, and we encourage you to review them.",
+      "Our website may contain links to external platforms such as WhatsApp. Those platforms operate under their own privacy policies, and we encourage you to review them.",
     ],
   },
   {

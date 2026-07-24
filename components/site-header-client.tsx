@@ -26,7 +26,6 @@ export function SiteHeaderClient({
   const pathname = usePathname()
 
   const isServicesActive = pathname.startsWith('/services')
-  const isWorkActive = pathname === '/work'
   const isArtworkActive = pathname === '/artwork'
   const isAboutActive = pathname === '/about'
 
@@ -75,7 +74,7 @@ export function SiteHeaderClient({
                   ref={servicesContentRef}
                   initial={{ opacity: 0, y: 8, filter: 'blur(2px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: 8, filter: 'blur(2px)' }}
+                  exit={{ opacity: 0, y: 8, filter: 'blur(2px)', transition: { duration: 0.12 } }}
                   transition={{ duration: 0.22 }}
                   className="absolute inset-x-0 top-full border-b border-border bg-popover shadow-elevated"
                 >
@@ -101,22 +100,13 @@ export function SiteHeaderClient({
           </div>
 
           <Link
-            href="/work"
-            aria-current={isWorkActive ? 'page' : undefined}
-            className={`rounded-full px-4 py-2 text-sm transition active:scale-[0.98] duration-150 ease-smooth ${
-              isWorkActive ? 'bg-muted text-foreground' : 'text-foreground/90 hover:bg-muted'
-            }`}
-          >
-            Our work
-          </Link>
-          <Link
             href="/artwork"
             aria-current={isArtworkActive ? 'page' : undefined}
             className={`rounded-full px-4 py-2 text-sm transition active:scale-[0.98] duration-150 ease-smooth ${
               isArtworkActive ? 'bg-muted text-foreground' : 'text-foreground/90 hover:bg-muted'
             }`}
           >
-            Artwork
+            Portfolio
           </Link>
           <Link
             href="/about"
@@ -178,16 +168,6 @@ export function SiteHeaderClient({
 
               <div className="mt-4 flex flex-col gap-2">
                 <Link
-                  href="/work"
-                  onClick={() => setMobileOpen(false)}
-                  aria-current={isWorkActive ? 'page' : undefined}
-                  className={`rounded-md px-2 py-3 text-base transition-transform duration-150 ease-smooth active:scale-[0.98] ${
-                    isWorkActive ? 'bg-muted text-foreground' : 'text-foreground'
-                  }`}
-                >
-                  Our work
-                </Link>
-                <Link
                   href="/artwork"
                   onClick={() => setMobileOpen(false)}
                   aria-current={isArtworkActive ? 'page' : undefined}
@@ -195,7 +175,7 @@ export function SiteHeaderClient({
                     isArtworkActive ? 'bg-muted text-foreground' : 'text-foreground'
                   }`}
                 >
-                  Artwork
+                  Portfolio
                 </Link>
                 <Link
                   href="/about"
